@@ -25,8 +25,8 @@ class test extends React.Component {
      };
 
     let rekognition = new AWS.Rekognition({ 
-      accessKeyId: 'AKIA6HEU65DSR5NU27V5',
-      secretAccessKey: '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',
+      accessKeyId: process.env.AWS_ACCESS_ID,
+      secretAccessKey: process.env.AWS_SECRET_KEY,
       region: 'us-east-2'
     })
 
