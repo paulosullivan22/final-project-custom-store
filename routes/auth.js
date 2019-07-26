@@ -7,33 +7,37 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
+router.post("/login", (req, res) => {
+  passport.authenticate("local", (err, user) => {
+    if (err) {
+      return res.status(500).json({ message: "Error while authenticating" });
+    } else if (!user) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+    req.login(user, err => {
+      if (err) {
+        return res
+          .status(500)
+          .json({ message: "Error while attempting to login" });
+      }
 
-router.get("/login", (req, res, next) => {
-  res.render("auth/login", { "message": req.flash("error") });
-});
-
-router.post("/login", passport.authenticate("local", {
-  successRedirect: "/",
-  failureRedirect: "/auth/login",
-  failureFlash: true,
-  passReqToCallback: true
-}));
-
-router.get("/signup", (req, res, next) => {
-  res.render("auth/signup");
+      return res.status(200).json('success');
+    });
+  })(req, res);
 });
 
 router.post("/signup", (req, res, next) => {
-  const username = req.body.username;
-  const password = req.body.password;
+  const { username, password } = req.body
+
   if (username === "" || password === "") {
-    res.render("auth/signup", { message: "Indicate username and password" });
-    return;
+    return res.status(400).json({ message: "Please submit both fields."});
+  } else if (password.length < 8) {
+    return res.status(400).json({ message: "Password must be minimum 8 characters"})
   }
 
   User.findOne({ username }, "username", (err, user) => {
     if (user !== null) {
-      res.render("auth/signup", { message: "The username already exists" });
+      res.json({ message: "This username is already taken."})
       return;
     }
 
@@ -45,19 +49,25 @@ router.post("/signup", (req, res, next) => {
       password: hashPass
     });
 
-    newUser.save()
-    .then(() => {
-      res.redirect("/");
+    newUser.save().then(user=>{
+      req.login(user,()=>res.json(user))
     })
+      
     .catch(err => {
-      res.render("auth/signup", { message: "Something went wrong" });
+      console.log("Error creating user" + err)
+      res.json({ message: "Uh oh, something went wrong."})
     })
   });
 });
 
-router.get("/logout", (req, res) => {
+router.post("/logout", (req, res) => {
+  console.log('logout route working')
   req.logout();
-  res.redirect("/");
+  res.status(200).json({ message: "User was successfully logged out"})
 });
+
+router.get("/loggedin", (req, res) => {
+  res.json(req.user)
+})
 
 module.exports = router;
