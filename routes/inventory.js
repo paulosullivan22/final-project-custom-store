@@ -5,7 +5,6 @@ const Inventory = require("../models/Inventory");
 router.get('/', (req, res) => {
   Inventory.find()
     .then(inventory => {
-      console.log(inventory)
       res.json(inventory)
     })
     .catch(err => {

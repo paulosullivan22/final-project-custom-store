@@ -17,7 +17,7 @@ import FileUpload from './containers/FileUpload'
 
 class App extends React.Component {
   state = {
-    user: this.props.user
+    user: this.props.user,
   }
 
   setUser = user => {

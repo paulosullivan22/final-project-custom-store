@@ -21,7 +21,7 @@ router.post("/login", (req, res) => {
           .json({ message: "Error while attempting to login" });
       }
 
-      return res.status(200).json('success');
+      return res.status(200).json(user);
     });
   })(req, res);
 });
