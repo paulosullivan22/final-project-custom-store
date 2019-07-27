@@ -19,7 +19,7 @@ class FileUpload extends Component {
     let fileParts = this.uploadInput.files[0].name.split('.');
     let fileName = fileParts[0];
     let fileType = fileParts[1];
-    console.log("Preparing the upload");
+    console.log(`https://project3profileimages.s3.us-east-2.amazonaws.com/${fileName}`)
     axios.post("/api/sign_s3",{
       fileName,
       fileType
@@ -35,7 +35,6 @@ class FileUpload extends Component {
      var options = { headers: { "Content-Type": fileType, "x-amz-acl": "public-read" } };
       axios.put(signedRequest, file, options)
       .then(result => {
-        console.log("Response from s3")
         this.setState({ success: true });
       })
       .catch(error => {
