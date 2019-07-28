@@ -3,7 +3,7 @@ import AWS from 'aws-sdk';
 import Webcam from 'react-webcam'
 import Clarifai from 'clarifai';
 
-class test extends React.Component {
+class FacialLogin extends React.Component {
 
   setRef = webcam => {
     this.webcam = webcam;
@@ -81,4 +81,4 @@ class test extends React.Component {
     }
   }
 
-export default test
+export default FacialLogin

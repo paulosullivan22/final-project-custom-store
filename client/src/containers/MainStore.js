@@ -22,13 +22,14 @@ class MainStore extends React.Component {
   filterChange = (filter) => {
     console.log(filter)
 
-    const filteredInventory = this.state.originalInventory.filter(
-      item => {
-        
-      }
-    )
 
-    console.log(filteredInventory)
+    // const filteredInventory = this.state.originalInventory.filter(
+    //   item => {
+  
+    //   }
+    // )
+
+    // console.log(filteredInventory)
 
     // const filteredInventory = this.state.originalInventory.filter(
     //   item => {

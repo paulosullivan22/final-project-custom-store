@@ -8,12 +8,15 @@ import UserHomePage from './containers/UserHomePage';
 // import PersonalStore from '../containers/PersonalStore';
 import MainStore from './containers/MainStore';
 import Wishlist from './containers/Wishlist';
-import Login from './containers/Login';
 import Signup from './containers/Signup';
-import test from './components/test'
 import Protected from './components/Protected'
 import Home from './containers/Home'
 import FileUpload from './containers/FileUpload'
+import LoginHome from './containers/Logins/LoginHome'
+import FacialLogin from './containers/Logins/FacialLogin'
+import SocialLogin from './containers/Logins/SocialLogin'
+import LocalLogin from './containers/Logins/LocalLogin'
+
 
 class App extends React.Component {
   state = {
@@ -27,6 +30,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.state.user)
     return (
       <div>
           <Navbar setUser={this.setUser} user={this.state.user} /> 
@@ -36,7 +40,7 @@ class App extends React.Component {
             <Route 
               exact 
               path='/'
-              component={test}
+              component={Home}
               />
 
             <Protected
@@ -54,7 +58,7 @@ class App extends React.Component {
               redirectPath='/user'
               setUser={this.setUser}
               user={!this.state.user}
-              component={Login}
+              component={LoginHome}
               />
 
             <Protected
@@ -99,6 +103,24 @@ class App extends React.Component {
               exact 
               path='/fileupload'
               component={FileUpload}
+              />
+
+            <Route
+              exact
+              path='/faciallogin'
+              component={FacialLogin}
+              />
+
+            <Route
+              exact
+              path='/sociallogin'
+              component={SocialLogin}
+              />
+
+            <Route
+              exact
+              path='/emaillogin'
+              component={LocalLogin}
               />
 
           </Switch>

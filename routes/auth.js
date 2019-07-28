@@ -7,24 +7,36 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
-router.post("/login", (req, res) => {
-  passport.authenticate("local", (err, user) => {
-    if (err) {
-      return res.status(500).json({ message: "Error while authenticating" });
-    } else if (!user) {
-      return res.status(401).json({ message: "Invalid credentials" });
+router.post('/login', (req, res) => {
+  console.log("Request received")
+  User.findOne({ username: req.body.username }, (err, user) => {
+    console.log("Request processed")
+    if (!user) {
+      console.log("no user exists")
+      return res.json({ message: "This username does not exist"})
     }
-    req.login(user, err => {
-      if (err) {
-        return res
-          .status(500)
-          .json({ message: "Error while attempting to login" });
-      }
+    else return res.json(user)
+  })
+})
 
-      return res.status(200).json(user);
-    });
-  })(req, res);
-});
+// router.post("/login", (req, res) => {
+//   passport.authenticate("local", (err, user) => {
+//     if (err) {
+//       return res.status(500).json({ message: "Error while authenticating" });
+//     } else if (!user) {
+//       return res.status(401).json({ message: "Invalid credentials" });
+//     }
+//     req.login(user, err => {
+//       if (err) {
+//         return res
+//           .status(500)
+//           .json({ message: "Error while attempting to login" });
+//       }
+
+//       return res.status(200).json(user);
+//     });
+//   })(req, res);
+// });
 
 router.post("/signup", (req, res, next) => {
   const { username, password } = req.body
