@@ -19,7 +19,7 @@ class LoginHome extends React.Component {
       .then(res => {
         const { message } = res.data
         if (message) return this.setState({ message })
-        return this.props.history.push(`/${path}login`)
+        return this.props.history.push(`/${path}login/${this.state.username}`)
 
       })
       .catch(err => console.log(err))
@@ -31,14 +31,13 @@ class LoginHome extends React.Component {
     return (
       <div>
 
-        <h1>LoginHome</h1>
+        <h1>Login</h1>
 
           <label htmlFor="username">Enter your username</label>
           <input type="text" name="username" onChange={this.handleChange} />
 
 
           <button onClick={() => this.handleClick("facial")}>Facial Login</button>
-          <button onClick={() => this.handleClick("social")}>Social Login</button>
           <button onClick={() => this.handleClick("email")}>Email Login</button>
 
           {(this.state.message.length) ? 

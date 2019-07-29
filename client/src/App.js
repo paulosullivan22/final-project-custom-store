@@ -1,21 +1,23 @@
 import React from 'react';
 import { Switch, Route } from "react-router-dom";
 
-import './App.css';
+import './stylesheets/App.scss';
 
 import Navbar from './components/Navbar'
-import UserHomePage from './containers/UserHomePage';
+import UserHomePage from './containers/Homepages/UserHomePage';
 // import PersonalStore from '../containers/PersonalStore';
-import MainStore from './containers/MainStore';
-import Wishlist from './containers/Wishlist';
-import Signup from './containers/Signup';
+import MainStore from './containers/Store/MainStore';
+import Wishlist from './containers/Store/Wishlist';
+import Signup from './containers/Signup/Signup';
 import Protected from './components/Protected'
-import Home from './containers/Home'
-import FileUpload from './containers/FileUpload'
-import LoginHome from './containers/Logins/LoginHome'
-import FacialLogin from './containers/Logins/FacialLogin'
-import SocialLogin from './containers/Logins/SocialLogin'
-import LocalLogin from './containers/Logins/LocalLogin'
+import Home from './containers/Homepages/Home'
+import FileUpload from './containers/Signup/FileUpload'
+import LoginHome from './containers/Login/LoginHome'
+import FacialLogin from './containers/Login/FacialLogin'
+import SocialLogin from './containers/Login/SocialLogin'
+import LocalLogin from './containers/Login/LocalLogin'
+import FacialSignup from './containers/Signup/FacialSignup';
+import LocalSignup from './containers/Signup/LocalSignup'
 
 
 class App extends React.Component {
@@ -30,9 +32,9 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.user)
     return (
       <div>
+
           <Navbar setUser={this.setUser} user={this.state.user} /> 
 
           <Switch>
@@ -41,6 +43,7 @@ class App extends React.Component {
               exact 
               path='/'
               component={Home}
+              user={this.state.user}
               />
 
             <Protected
@@ -107,20 +110,42 @@ class App extends React.Component {
 
             <Route
               exact
-              path='/faciallogin'
+              path='/faciallogin/:id'
               component={FacialLogin}
+              setUser={this.setUser}
+              user={!this.state.user}
               />
 
             <Route
               exact
-              path='/sociallogin'
+              path='/sociallogin/:id'
               component={SocialLogin}
+              setUser={this.setUser}
+              user={!this.state.user}
               />
 
             <Route
               exact
-              path='/emaillogin'
+              path='/emaillogin/:id'
               component={LocalLogin}
+              setUser={this.setUser}
+              user={!this.state.user}
+              />
+
+            <Route
+              exact
+              path='/localsignup'
+              component={LocalSignup}
+              // setUser={this.setUser}
+              // user={!this.state.user}
+              />
+
+            <Route
+              exact
+              path='/facialsignup'
+              component={FacialSignup}
+              setUser={this.setUser}
+              user={!this.state.user}
               />
 
           </Switch>

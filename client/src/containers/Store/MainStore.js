@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import SearchBar from '../components/SearchBar'
-import FilterChoices from '../components/FilterChoices'
+import SearchBar from '../../components/SearchBar'
+import FilterChoices from '../../components/FilterChoices'
+require('./MainStore.scss')
 
 class MainStore extends React.Component {
   state = {
@@ -74,29 +75,33 @@ class MainStore extends React.Component {
             />
 
           {(!this.state.inventory.length) ? 
-            <div>Loading</div> :
-
-            this.state.inventory.map(item => {
+            (<div>Loading</div>) :
+            
+            (<div className="item-container">
+            {this.state.inventory.map(item => {
               return (
-                  <div key={item._id}>
-                    <h2>{item.name}</h2>
+                  <div className="item-card" key={item._id}>
+                    <p>{item.name}</p>
                     <img 
                       src={item.image} 
                       alt={item.name} 
-                      height="300px"
                       onMouseOver={e => (e.currentTarget.src=`${item.image2}`)}
                       onMouseOut={e => (e.currentTarget.src=`${item.image}`)}
                       />
-                    <p>{item.type}</p>
-                    <button onClick={() => {
-                      this.props.user.wishlist.push(item)
-                      console.log(this.props.user)
-                    }
-                    }>Add to wishlist</button>
+                    <div className="item-content">
+                        <p>{item.type}</p>
+                        <span>|</span>
+                        <button 
+                          onClick={() => {
+                          this.props.user.wishlist.push(item)
+                          console.log(this.props.user)
+                          }}>Add to wishlist</button>
+                      </div>
                   </div>
               )
             })
-          }
+          }</div>)
+        }
 
       </div>
     )

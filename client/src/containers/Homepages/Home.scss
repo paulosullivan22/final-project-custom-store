@@ -1,0 +1,19 @@
+.home-container {
+  height: 100vh;
+  background-color: #F4F4F4;
+
+  h1 {
+    color: #2c2c2c;
+    padding: 100px 50px 0;
+    font-size: 3rem;
+  }
+}
+
+.shape {
+  height: 70vh;
+  width: 100%;
+  background-image: linear-gradient(167deg, #dfdfdf 70%, #F4F4F4 calc(70% + 2px));
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

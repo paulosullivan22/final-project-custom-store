@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './stylesheets/index.css';
 import App from './App';
 import { BrowserRouter } from "react-router-dom";
 import axios from "axios";
-require('dotenv').config()
 
 axios
   .get("/api/auth/loggedin")

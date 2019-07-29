@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios'
 
-class Login extends React.Component {  
+class LocalLogin extends React.Component {  
   state = {
     username: '',
     password: '',
@@ -18,23 +18,24 @@ class Login extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
+    console.log(this.props)
 
-    console.log(this.state.user)
-    console.log(this.state.username)
     axios
-      .post("/api/auth/login", {
+      .post("/api/auth/emaillogin", {
         username: this.state.username,
         password: this.state.password
       })
       .then(res => {
+        const { message } = res.data
+        if (message) return this.setState({ message })
         this.props.setUser(res.data)
         this.props.history.push('/store')
         }
       )
       .catch(err => {
-        this.setState({
-          message: err.data.message
-        })
+        console.log(err)
+          // const { message } = err.data
+          // if (message) this.setState({ message })
       })
   }
 
@@ -79,4 +80,4 @@ class Login extends React.Component {
 }
 
 
-export default Login
+export default LocalLogin

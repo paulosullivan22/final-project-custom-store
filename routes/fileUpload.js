@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const User = require("../models/User");
 
 var aws = require('aws-sdk'); 
 require('dotenv').config(); // Configure dotenv to load in the .env file
@@ -31,7 +32,6 @@ s3.getSignedUrl('putObject', s3Params, (err, data) => {
       res.json({success: false, error: err})
     }
     // Data payload of what we are sending back, the url of the signedRequest and a URL where we can access the content after its saved. 
-    console.log(fileName)
 const returnData = {
       signedRequest: data,
       url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
