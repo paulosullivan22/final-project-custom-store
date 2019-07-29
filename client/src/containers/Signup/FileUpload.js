@@ -14,10 +14,10 @@ class FileUpload extends Component {
   // Perform the upload
   handleUpload = (ev) => {
     if (!this.props.username.length) return this.props.errorMessage("Please fill in username")
-    let file = this.uploadInput.files[0];
+    let file = this.uploadInput.files[0] || this.props.capturedImage
+    // new File([this.props.capturedImage], 'captured-image.jpg')
     // Split the filename to get the name and type
-    console.log(this.uploadInput.files[0])
-    let fileParts = this.uploadInput.files[0].name.split('.');
+    let fileParts = file.name.split('.')
     let fileName = fileParts[0];
     let fileType = fileParts[1];
     console.log(`https://project3profileimages.s3.us-east-2.amazonaws.com/${fileName}`)
@@ -32,8 +32,8 @@ class FileUpload extends Component {
       this.setState({ url })
       console.log("Recieved a signed request " + signedRequest);
       
-     // Put the fileType in the headers for the upload
-     var options = { headers: { "Content-Type": fileType, "x-amz-acl": "public-read" } };
+     const options = { headers: { "Content-Type": fileType, "x-amz-acl": "public-read" } };
+     console.log(file)
       axios.put(signedRequest, file, options)
       .then(result => {
         this.setState({ success: true });
@@ -96,13 +96,13 @@ export default FileUpload;
 //   handleUpload = (ev) => {
 //     if (!this.props.username.length) return this.props.errorMessage("Please fill in username")
 //     let newFile = new File([this.props.capturedImage], 'captured-image.jpg')
-//     let file = newFile || this.uploadInput.files[0];
+//     let file = this.uploadInput.files[0] || newFile;
 //     // Split the filename to get the name and type
-//     console.log(file)
+//     // console.log(file)
 //     let fileParts = this.props.capturedImage.split('.') || file.name.split('.')
-//     let fileName = fileParts[0];
+//     let fileName = fileParts[0] || "captured-image";
 //     let fileType = 'jpg';
-//     console.log(`https://project3profileimages.s3.us-east-2.amazonaws.com/${this.props.username}profile-picture`)
+//     // console.log(`https://project3profileimages.s3.us-east-2.amazonaws.com/${this.props.username}profile-picture`)
 //     axios.post("/api/sign_s3",{
 //       fileName,
 //       fileType
@@ -116,10 +116,11 @@ export default FileUpload;
       
 //      // Put the fileType in the headers for the upload
 //      var options = { headers: { "Content-Type": fileType, "x-amz-acl": "public-read" } };
+//      console.log(file)
 //       axios.put(signedRequest, file, options)
 //       .then(result => {
 //         this.setState({ success: true });
-//         console.log("successful upload")
+//         console.log("successful upload", result)
 //       })
 //       .catch(error => {
 //         console.log(error)

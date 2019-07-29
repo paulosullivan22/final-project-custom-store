@@ -2,7 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import SearchBar from '../../components/SearchBar'
 import FilterChoices from '../../components/FilterChoices'
-require('./MainStore.scss')
+import WishlistButton from '../../components/WishlistButton'
+// require('./MainStore.scss')
 
 class MainStore extends React.Component {
   state = {
@@ -11,6 +12,7 @@ class MainStore extends React.Component {
   }
 
   searchChange = e => {
+    console.log(this.state.inventory)
     const filteredInventory = this.state.originalInventory.filter(
       item => item.name.toLowerCase().includes(e.target.value.toLowerCase())
     )
@@ -50,7 +52,7 @@ class MainStore extends React.Component {
     console.log(this.props.user)
 
     axios
-      .get('/api/inventory')
+      .get('/api/store')
       .then(res => {
         this.setState({
           inventory: res.data,
@@ -74,6 +76,7 @@ class MainStore extends React.Component {
             filterChange={this.filterChange}
             />
 
+          <div className="store-container">
           {(!this.state.inventory.length) ? 
             (<div>Loading</div>) :
             
@@ -91,17 +94,17 @@ class MainStore extends React.Component {
                     <div className="item-content">
                         <p>{item.type}</p>
                         <span>|</span>
-                        <button 
-                          onClick={() => {
-                          this.props.user.wishlist.push(item)
-                          console.log(this.props.user)
-                          }}>Add to wishlist</button>
+                        <WishlistButton 
+                          item={item}
+                          user={this.props.user}
+                          />
                       </div>
                   </div>
               )
             })
           }</div>)
-        }
+          
+        }</div>
 
       </div>
     )

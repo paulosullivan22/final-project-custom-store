@@ -2,7 +2,6 @@ import React from 'react';
 import FileUpload from './FileUpload';
 import Webcam from 'react-webcam'
 
-
 class FacialSignup extends React.Component {
   state = {
     image: '',
@@ -33,9 +32,32 @@ class FacialSignup extends React.Component {
   };
  
   capture = () => {
+    if (!this.state.username.length) return this.setState({
+      errorMessage: "Please enter a username"
+    })
     const image = this.webcam.getScreenshot()
     const uploadImg = image.replace(/^data:image\/\w+;base64,/, "") 
-    console.log(uploadImg.split('.')[1])
+    const username = this.state.username
+
+    fetch(image)
+    .then(res => res.blob())
+    .then(blob => {
+      const fd = new FormData()
+      blob.lastModifiedDate = new Date()
+      blob.name = `${username}-profile-image`
+
+      fd.append('image', blob, 'name')
+
+      console.log(blob)
+
+      this.setState({
+        uploadImg: blob
+      })
+
+      console.log(this.state)
+    
+    })
+
     this.setState({ image, uploadImg }, () => console.log(this.state))
   }
 

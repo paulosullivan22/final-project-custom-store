@@ -3,6 +3,9 @@ import axios from 'axios'
 import Webcam from 'react-webcam'
 
 class FacialLogin extends React.Component {
+  state = {
+    errorMessage: ''
+  }
 
   setRef = webcam => {
     this.webcam = webcam;
@@ -12,8 +15,11 @@ class FacialLogin extends React.Component {
     const username = window.location.href.split('/').reverse()[0]
     const imageSrc = this.webcam.getScreenshot()
 
-    axios.post(`/api/auth/faciallogin/${username}`, { image: imageSrc})
-      .then(res => console.log(res))
+    axios.post(`/api/auth/faciallogin/${username}`, { image: imageSrc })
+      .then(res => {
+        const { message } = res.data
+        return (message) ? this.setState({ errorMessage: message }) : console.log(res)
+      })
       .catch(err => console.log(err))
   };
  
@@ -37,6 +43,10 @@ class FacialLogin extends React.Component {
             videoConstraints={videoConstraints}
           />
           <button onClick={this.capture}>Capture photo</button>
+
+          {(this.state.errorMessage) ? 
+            <div>{this.state.errorMessage}</div> : null
+          }
 
         </div>
       )

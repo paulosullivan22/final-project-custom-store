@@ -50,9 +50,11 @@ router.post('/faciallogin/:id', (req, res) => {
         apiKey: process.env.clarifaiApiKey
       });
 
+      if (!data.FaceMatches.length) return res.json({ message: "Sorry, this photo doesn't look like the account user."})
+
       if (data.FaceMatches[0].Similarity > 95) {
         return req.login(user,() => res.json(user))
-      }
+      } 
 
 
       app.models.predict("c0c0ac362b03416da06ab3fa36fb58e3", {base64: image.replace(/^data:image\/\w+;base64,/, "")})

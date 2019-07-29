@@ -96,19 +96,19 @@ class App extends React.Component {
               component={PersonalStore}
               /> */}
 
-            <Route 
+            <Protected 
               exact 
               path='/logout'
               component={Home}
               />
 
-            <Route 
+            <Protected 
               exact 
               path='/fileupload'
               component={FileUpload}
               />
 
-            <Route
+            <Protected
               exact
               path='/faciallogin/:id'
               component={FacialLogin}
@@ -116,7 +116,7 @@ class App extends React.Component {
               user={!this.state.user}
               />
 
-            <Route
+            <Protected
               exact
               path='/sociallogin/:id'
               component={SocialLogin}
@@ -124,7 +124,7 @@ class App extends React.Component {
               user={!this.state.user}
               />
 
-            <Route
+            <Protected
               exact
               path='/emaillogin/:id'
               component={LocalLogin}
@@ -136,11 +136,11 @@ class App extends React.Component {
               exact
               path='/localsignup'
               component={LocalSignup}
-              // setUser={this.setUser}
+              setUser={this.setUser}
               // user={!this.state.user}
               />
 
-            <Route
+            <Protected
               exact
               path='/facialsignup'
               component={FacialSignup}
