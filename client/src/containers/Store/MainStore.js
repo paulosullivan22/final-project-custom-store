@@ -3,7 +3,6 @@ import axios from 'axios';
 import SearchBar from '../../components/SearchBar'
 import FilterChoices from '../../components/FilterChoices'
 import WishlistButton from '../../components/WishlistButton'
-// require('./MainStore.scss')
 
 class MainStore extends React.Component {
   state = {
@@ -25,22 +24,21 @@ class MainStore extends React.Component {
   filterChange = (filter) => {
     console.log(filter)
 
+    // filter array
+    // this.state.originalInventory array
 
-    // const filteredInventory = this.state.originalInventory.filter(
-    //   item => {
-  
-    //   }
-    // )
+    // filter all items in this.state.originalInventory 
+    // where the name includes any item in the filter array
 
-    // console.log(filteredInventory)
+    const filteredInventory = this.state.originalInventory.filter(
+      item => {
+        return filter.forEach(filter => {
+          if (item.type.toLowerCase().includes(filter.toLowerCase())) return (item)
+        })     
+      }
+    )
 
-    // const filteredInventory = this.state.originalInventory.filter(
-    //   item => {
-    //     return (filterType === 'gender') ?
-    //         item.gender === filter :
-    //         item.type === filter
-    //   }
-    // )
+    console.log(filteredInventory)
 
     // this.setState({
     //   inventory: filteredInventory

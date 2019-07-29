@@ -71,15 +71,12 @@ app.use(session({
 // USE passport.initialize() and passport.session() HERE:
 app.use(passport.initialize())
 app.use(passport.session())
-app.get('/auth/facebook', passport.authenticate('facebook'));
 
 
 // default value for title local
 app.locals.title = "Express - Generated with IronGenerator";
 
-// ADD CORS SETTINGS HERE TO ALLOW CROSS-ORIGIN INTERACTION:
 
-// ROUTES MIDDLEWARE STARTS HERE:
 
 const index = require("./routes/index");
 app.use("/", index);

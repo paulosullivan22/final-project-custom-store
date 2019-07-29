@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-require('./Home.scss')
 
 class Home extends React.Component {
 
