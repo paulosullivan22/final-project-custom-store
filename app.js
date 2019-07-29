@@ -87,9 +87,6 @@ app.use("/api/store", store)
 const auth = require('./routes/auth')
 app.use('/api/auth/', auth)
 
-const socialAuth = require('./routes/socialAuth')
-app.use('/api', socialAuth)
-
 const fileUpload = require('./routes/fileUpload')
 app.use('/api', fileUpload)
 

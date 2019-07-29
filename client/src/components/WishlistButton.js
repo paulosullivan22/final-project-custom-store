@@ -8,9 +8,10 @@ class WishlistButton extends React.Component {
       user: this.props.user,
       item: this.props.item
     })
-    .then(data => {
+    .then(res => {
       console.log('here')
-      console.log(data)
+      console.log(res.data)
+      this.props.setUser(res.data)
     })
     .catch(err => console.log(err))
   }

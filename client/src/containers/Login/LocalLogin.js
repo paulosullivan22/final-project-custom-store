@@ -22,7 +22,7 @@ class LocalLogin extends React.Component {
 
     axios
       .post("/api/auth/emaillogin", {
-        username: this.state.username,
+        username: window.location.href.split('/').reverse()[0],
         password: this.state.password
       })
       .then(res => {
@@ -44,13 +44,6 @@ class LocalLogin extends React.Component {
         <div>
           Login
           <form onSubmit={this.handleSubmit}>
-
-            <label htmlFor='username'>Username: </label> 
-            <input 
-              type='text'
-              name='username'
-              onChange={this.handleChange}
-              />
 
             <label htmlFor='password'>Password: </label> 
             <input 

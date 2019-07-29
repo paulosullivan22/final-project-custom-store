@@ -24,29 +24,19 @@ class MainStore extends React.Component {
   filterChange = (filter) => {
     console.log(filter)
 
-    // filter array
-    // this.state.originalInventory array
-
-    // filter all items in this.state.originalInventory 
-    // where the name includes any item in the filter array
-
-    const filteredInventory = this.state.originalInventory.filter(
-      item => {
-        return filter.forEach(filter => {
-          if (item.type.toLowerCase().includes(filter.toLowerCase())) return (item)
-        })     
-      }
-    )
-
-    console.log(filteredInventory)
-
-    // this.setState({
-    //   inventory: filteredInventory
-    // })
+    const inventory = this.state.originalInventory.filter(item=>{
+      return filter.includes(item.type.toLowerCase()) ||
+            filter.includes(item.gender.toLowerCase())
+    })
+    console.log(inventory)
+    this.setState({
+      inventory
+    })
     
   }
 
   componentDidMount() {
+    console.log(this.props)
     console.log(this.props.user)
 
     axios
@@ -95,6 +85,7 @@ class MainStore extends React.Component {
                         <WishlistButton 
                           item={item}
                           user={this.props.user}
+                          setUser={this.props.setUser}
                           />
                       </div>
                   </div>

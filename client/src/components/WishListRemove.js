@@ -9,10 +9,10 @@ class WishlistRemove extends React.Component {
       user: this.props.user,
       item: this.props.item
     })
-    .then(data => {
+    .then(res => {
+      console.log(res.data)
       console.log('here')
-      console.log(data)
-      this.props.removedItem()
+      this.props.setUser(res.data)
     })
     .catch(err => console.log(err))
   }

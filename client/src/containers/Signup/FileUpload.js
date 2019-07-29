@@ -44,6 +44,8 @@ class FileUpload extends Component {
         .then(res => {
           (res.data.message) ? 
             this.props.redirect(false) : 
+            console.log(res.data)
+            this.props.setUser(res.data)
             this.props.redirect(true)
         })
       })

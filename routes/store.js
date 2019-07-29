@@ -18,18 +18,17 @@ router.post("/wishlist", (req, res) => {
 
   User.findOneAndUpdate({ _id: user._id }, {
     $push: { wishlist: item }
-  })
-  .then(data => res.json(user))
+  }, { new: true })
+  .then(data => res.json(data))
   .catch(err => console.log(err))
 })
 
 router.post("/wishlistremove", (req, res) => {
   const { user, item } = req.body
-
-  User.findOneAndUpdate({ _id: user._id }, {
+  User.findOneAndUpdate({ _id: user._id },  {
     $pull: { wishlist: item }
-  })
-  .then(data => res.json(user))
+  }, { new: true })
+  .then(data => res.json(data))
   .catch(err => console.log(err))
 })
 

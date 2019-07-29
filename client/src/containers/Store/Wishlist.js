@@ -2,13 +2,14 @@ import React from 'react'
 import WishlistRemove from './../../components/WishListRemove'
 
 class Wishlist extends React.Component {
-  state = {
-    wishlistChange: false
-  }
+  // state = {
+  //   wishlistChange: false
+  // }
   
-  removedItem = () => {
-    this.setState({ wishlistChange: !this.state.wishlistChange })
-  }
+  // removedItem = () => {
+  //   this.props.setUser({...this.props.user})
+  //   this.setState({ wishlistChange: !this.state.wishlistChange })
+  // }
 
   render() {
     return (
@@ -39,6 +40,7 @@ class Wishlist extends React.Component {
                           item={item}
                           user={this.props.user}
                           removedItem={this.removedItem}
+                          setUser={this.props.setUser}
                           />
                       </div>
                   </div>

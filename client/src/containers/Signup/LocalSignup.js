@@ -27,7 +27,7 @@ class LocalSignup extends React.Component {
       .then((response) => {
         console.log(response.data)
         const { message } = response.data
-        if (message) this.setState({ message })
+        if (message) return this.setState({ message })
         this.props.setUser(response.data)
         this.props.history.push("/")
         

@@ -99,6 +99,7 @@ class FacialSignup extends React.Component {
           capturedImage={this.state.uploadImg}
           errorMessage={this.errorMessage}
           redirect={this.redirect}
+          setUser={this.props.setUser}
           />
 
         {(this.state.errorMessage.length) ? 

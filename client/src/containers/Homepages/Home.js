@@ -25,6 +25,7 @@ class Home extends React.Component {
 
           <h1>Our future is a smart future.</h1>
           <Link to="/login">Login</Link>
+          <Link to="/signin">Signin</Link>
         </div>
       </div>
     )

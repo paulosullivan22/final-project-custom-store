@@ -26,6 +26,7 @@ class App extends React.Component {
   }
 
   setUser = user => {
+    console.log(user)
     this.setState({
       user: user
     })
@@ -38,6 +39,10 @@ class App extends React.Component {
           <Navbar setUser={this.setUser} user={this.state.user} /> 
 
           <Switch>
+            {/* <Route 
+            path={["/", "/login"]}
+            component={withoutNav}
+            /> */}
 
             <Route 
               exact 
@@ -68,6 +73,7 @@ class App extends React.Component {
               exact
               path="/store"
               redirectPath="/login"
+              setUser={this.setUser}
               user={this.state.user}
               component={MainStore}
               />
@@ -84,6 +90,7 @@ class App extends React.Component {
               exact
               path="/wishlist"
               redirectPath="/login"
+              setUser={this.setUser}
               user={this.state.user}
               component={Wishlist}
               />
@@ -132,12 +139,12 @@ class App extends React.Component {
               user={!this.state.user}
               />
 
-            <Route
+            <Protected
               exact
               path='/localsignup'
               component={LocalSignup}
               setUser={this.setUser}
-              // user={!this.state.user}
+              user={!this.state.user}
               />
 
             <Protected
