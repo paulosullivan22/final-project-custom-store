@@ -21,8 +21,12 @@ const Navbar = props => {
       <ul>
         <li>
           <Link to='/'>Home</Link>
-          <Link to='/store'>Main Store</Link>
-          <Link to='/wishlist'>Wishlist</Link>
+          {(props.user) ?
+          <>
+            <Link to='/store'>Main Store</Link>
+            <Link to='/wishlist'>Wishlist</Link>
+          </> :
+          null }
         </li>
 
         {!props.user ? (

@@ -23,7 +23,6 @@ class Login extends React.Component {
 
       })
       .catch(err => console.log(err))
-
   }
 
   render() {
@@ -36,9 +35,8 @@ class Login extends React.Component {
           <label htmlFor="username">Enter your username</label>
           <input type="text" name="username" onChange={this.handleChange} />
 
-
           <button onClick={() => this.handleClick("facial")}>Facial Login</button>
-          <button onClick={() => this.handleClick("email")}>Email Login</button>
+          <button onClick={() => this.handleClick("email")}>Password Login</button>
 
           {(this.state.message.length) ? 
             <div>{this.state.message}</div> : null

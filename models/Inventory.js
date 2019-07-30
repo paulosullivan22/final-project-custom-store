@@ -8,6 +8,7 @@ const inventorySchema = new Schema({
   description: String,
   gender: String,
   ageRange: Number,
+  color: String,
   image: String,
   image2: String,
 }, {

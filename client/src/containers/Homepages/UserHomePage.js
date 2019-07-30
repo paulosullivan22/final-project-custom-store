@@ -22,21 +22,49 @@ class UserHomepage extends React.Component {
               temp: (data.data.main.temp - 273.15).toFixed(1)
             })
             console.log(this.state)
-
           })
-          .catch(err => console.log(err))
       })
       .catch(err => console.log(err))
-  
 
-    axios.get(`/api/store/personalstore/${this.props.user._id}`)
+    axios
+      .get('/api/store')
       .then(res => {
-        this.setState({ inventory: res.data })
-        console.log(this.state)
-      })
-      .catch(err => console.log(err))
 
-    }
+        let wishlistCategories = []
+        let wishlistColors = []
+        if (this.props.user.wishlist) {
+          wishlistCategories = this.props.user.wishlist.map(item => item.category)
+          wishlistColors = this.props.user.wishlist.map(item => item.color)
+        }
+
+        let personalInventory = res.data.filter(item=>{
+          return this.props.user.gender === item.gender &&
+            (wishlistCategories.includes(item.category) ||
+             wishlistColors.includes(item.color) ||
+            (item.ageRange === this.props.user.age))
+        })
+
+        const shuffle = (array = res.data) => {
+          var j, x, i;
+          for (i = array.length - 1; i > 0; i--) {
+              j = Math.floor(Math.random() * (i + 1));
+              x = array[i];
+              array[i] = array[j];
+              array[j] = x;
+          }
+          return array;
+      }
+
+      let shuffledInventory = shuffle(personalInventory)
+
+        this.setState({ inventory: shuffledInventory })
+      })
+      .catch(err => {
+        console.log(err)
+      });
+
+  }
+    
 
   render() {
     return (
@@ -51,8 +79,8 @@ class UserHomepage extends React.Component {
             (<div>Loading</div>) :
             
             (<div className="item-container">
-            {this.state.inventory.map(item => {
-              return (
+            {this.state.inventory.map((item, i) => {
+              return (i < 8) ? (
                   <div className="item-card" key={item._id}>
                     <p>{item.name}</p>
                     <img 
@@ -62,7 +90,7 @@ class UserHomepage extends React.Component {
                       onMouseOut={e => (e.currentTarget.src=`${item.image}`)}
                       />
                     <div className="item-content">
-                        <p>{item.type}</p>
+                        <p>{item.category}</p>
                         <span>|</span>
                         <WishlistButton 
                           item={item}
@@ -71,7 +99,7 @@ class UserHomepage extends React.Component {
                           />
                       </div>
                   </div>
-              )
+              ) : null
             })
           }</div>)
           

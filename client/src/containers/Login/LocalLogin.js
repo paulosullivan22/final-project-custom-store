@@ -5,7 +5,7 @@ class LocalLogin extends React.Component {
   state = {
     username: '',
     password: '',
-    message: ''
+    message: '',
   }
   
   handleChange = e => {
@@ -27,6 +27,7 @@ class LocalLogin extends React.Component {
       })
       .then(res => {
         const { message } = res.data
+        console.log('res: ' + res)
         if (message) return this.setState({ message })
         this.props.setUser(res.data)
         this.props.history.push('/store')
@@ -34,8 +35,6 @@ class LocalLogin extends React.Component {
       )
       .catch(err => {
         console.log(err)
-          // const { message } = err.data
-          // if (message) this.setState({ message })
       })
   }
 

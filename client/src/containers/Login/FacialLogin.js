@@ -1,11 +1,20 @@
 import React from 'react';
 import axios from 'axios'
 import Webcam from 'react-webcam'
+import SigninFileUpload from './../../components/SigninFileUpload'
+
 
 class FacialLogin extends React.Component {
   state = {
-    errorMessage: ''
+    errorMessage: ''  
   }
+
+  importUploadedFile = file => {
+    // const username = window.location.href.split('/').reverse()[0]
+
+    console.log(file)
+  }
+
 
   setRef = webcam => {
     this.webcam = webcam;
@@ -14,6 +23,7 @@ class FacialLogin extends React.Component {
   capture = () => {
     const username = window.location.href.split('/').reverse()[0]
     const imageSrc = this.webcam.getScreenshot()
+
 
     axios.post(`/api/auth/faciallogin`, { image: imageSrc, username })
       .then(res => {
@@ -47,6 +57,10 @@ class FacialLogin extends React.Component {
           {(this.state.errorMessage) ? 
             <div>{this.state.errorMessage}</div> : null
           }
+
+          <SigninFileUpload
+            exportFile={this.importUploadedFile}
+            />
 
         </div>
       )

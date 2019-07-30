@@ -20,6 +20,7 @@ router.get("/personalstore/:id", (req, res) => {
   User.findById({ _id: id })
   .then(user => {
     console.log("User data following:")
+    
     Inventory.find({
       $and: [
         { gender: user.gender },

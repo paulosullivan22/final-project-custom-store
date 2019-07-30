@@ -64,19 +64,19 @@ router.post("/emaillogin", (req, res) => {
   User.findOne({ username })
     .then(user => {
       if (!user) {
-        return res.status(401).json({ message: "Please provide valid credentials."})
+        return res.json({ message: "Please provide valid credentials."})
       }
 
-      // if (bcrypt.compareSync(password, user.password)) {
+      if (bcrypt.compareSync(password, user.password)) {
         console.log("valid session")
         req.session.currentUser = user
         console.log(req.session.currentUser)
        
         req.login(user,() => res.json(user))
-      // } else {
-      //   console.log("password error")
-      //   return res.status(401).json({ message: "Please provide valid credentials."})
-      // }
+      } else {
+        console.log("password error")
+        return res.json({ message: "Please provide valid credentials."})
+      }
     })
     .catch(err => next(err))
 })
@@ -125,13 +125,12 @@ router.post("/facialsignup", (req, res) => {
 
     newUserLogin = (newUser) => {
       newUser.save().then(user=>{
-        req.login(user,() => res.json({ user }))
+        req.login(user,() => res.json(user))
       })
     }
 
     app.models.predict("c0c0ac362b03416da06ab3fa36fb58e3", profileImg)
       .then(res => {
-        console.log('clarifai api working')
         const ageData = res.outputs[0].data.regions[0].data.face.age_appearance.concepts;
         const age = Math.round(ageData.map(age => parseInt(age.name)).reduce((acc, val) => acc + val)/ageData.length)
 

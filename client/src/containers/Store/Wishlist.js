@@ -34,7 +34,7 @@ class Wishlist extends React.Component {
                       onMouseOut={e => (e.currentTarget.src=`${item.image}`)}
                       />
                     <div className="item-content">
-                        <p>{item.type}</p>
+                        <p>{item.category}</p>
                         <span>|</span>
                         <WishlistRemove 
                           item={item}

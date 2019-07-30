@@ -14,13 +14,13 @@ class FileUpload extends Component {
   // Perform the upload
   handleUpload = (ev) => {
     if (!this.props.username.length) return this.props.errorMessage("Please fill in username")
+
     let file = this.uploadInput.files[0] || this.props.capturedImage
-    // new File([this.props.capturedImage], 'captured-image.jpg')
-    // Split the filename to get the name and type
+
     let fileParts = file.name.split('.')
     let fileName = fileParts[0];
     let fileType = fileParts[1];
-    console.log(`https://project3profileimages.s3.us-east-2.amazonaws.com/${fileName}`)
+
     axios.post("/api/sign_s3",{
       fileName,
       fileType
