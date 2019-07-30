@@ -1,11 +1,13 @@
 import React from 'react'
 import axios from 'axios'
+import WishlistButton from './../../components/WishlistButton'
 // import Typed from 'typed.js'
 
-class UserHomePage extends React.Component {
+class UserHomepage extends React.Component {
   state = {
     city: '',
-    temp: ''
+    temp: '',
+    inventory: []
   }
 
   componentDidMount() {
@@ -28,7 +30,10 @@ class UserHomePage extends React.Component {
   
 
     axios.get(`/api/store/personalstore/${this.props.user._id}`)
-      .then(res => console.log(res))
+      .then(res => {
+        this.setState({ inventory: res.data })
+        console.log(this.state)
+      })
       .catch(err => console.log(err))
 
     }
@@ -38,9 +43,43 @@ class UserHomePage extends React.Component {
       <div>
 
         <h1>Welcome from {this.state.city} where the temperature is {this.state.temp}°C</h1>
+
+        <h2>Your recommended collection: </h2>
+
+        <div className="store-container">
+          {(!this.state.inventory.length) ? 
+            (<div>Loading</div>) :
+            
+            (<div className="item-container">
+            {this.state.inventory.map(item => {
+              return (
+                  <div className="item-card" key={item._id}>
+                    <p>{item.name}</p>
+                    <img 
+                      src={item.image} 
+                      alt={item.name} 
+                      onMouseOver={e => (e.currentTarget.src=`${item.image2}`)}
+                      onMouseOut={e => (e.currentTarget.src=`${item.image}`)}
+                      />
+                    <div className="item-content">
+                        <p>{item.type}</p>
+                        <span>|</span>
+                        <WishlistButton 
+                          item={item}
+                          user={this.props.user}
+                          setUser={this.props.setUser}
+                          />
+                      </div>
+                  </div>
+              )
+            })
+          }</div>)
+          
+        }</div>
+
       </div>
     )
   }
 }
 
-export default UserHomePage;
+export default UserHomepage;

@@ -16,7 +16,7 @@ const MongoStore = require('connect-mongo')(session);
 require('./passport');
 
 mongoose
-  .connect("mongodb://localhost/final-project-custom-store", {
+  .connect(process.env.MONGODB_URI || "mongodb://localhost/final-project-custom-store", {
     useNewUrlParser: true
   })
   .then(x => {

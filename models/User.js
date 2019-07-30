@@ -9,6 +9,8 @@ const userSchema = new Schema({
   wishlist: [],
   facebookId: String,
   profileImg: String,
+  age: Number,
+  gender: String,
 }, {
   timestamps: {
     createdAt: 'created_at',

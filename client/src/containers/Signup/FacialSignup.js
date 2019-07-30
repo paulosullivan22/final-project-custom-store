@@ -22,8 +22,11 @@ class FacialSignup extends React.Component {
     })
   }
 
-  redirect = bool => {
-    if (bool) this.props.history.push('/')
+  redirect = (bool, user) => {
+    if (bool) {
+      this.props.setUser(user)
+      this.props.history.push('/')
+    }
     else this.setState({ errorMessage: "This username is already taken" })
   }
 

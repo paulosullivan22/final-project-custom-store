@@ -24,11 +24,12 @@ class MainStore extends React.Component {
   filterChange = (filter) => {
     console.log(filter)
 
-    const inventory = this.state.originalInventory.filter(item=>{
-      return filter.includes(item.type.toLowerCase()) ||
+    let inventory = this.state.originalInventory.filter(item=>{
+      return filter.includes(item.category.toLowerCase()) ||
             filter.includes(item.gender.toLowerCase())
     })
     console.log(inventory)
+    if (!inventory.length) inventory = this.state.originalInventory
     this.setState({
       inventory
     })
@@ -53,8 +54,6 @@ class MainStore extends React.Component {
   }
 
   render() {
-
-    console.log("main store mounting")
 
     return (
       <div>
@@ -81,7 +80,7 @@ class MainStore extends React.Component {
                       onMouseOut={e => (e.currentTarget.src=`${item.image}`)}
                       />
                     <div className="item-content">
-                        <p>{item.type}</p>
+                        <p>{item.category}</p>
                         <span>|</span>
                         <WishlistButton 
                           item={item}

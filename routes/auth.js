@@ -81,25 +81,6 @@ router.post("/emaillogin", (req, res) => {
     .catch(err => next(err))
 })
 
-// router.post("/emaillogin", (req, res) => {
-//   passport.authenticate("local", (err, user) => {
-//     if (err) {
-//       return res.status(500).json({ message: "Error while authenticating" });
-//     } else if (!user) {
-//       return res.status(401).json({ message: "Invalid credentials" });
-//     }
-//     req.login(user, err => {
-//       if (err) {
-//         return res
-//           .status(500)
-//           .json({ message: "Error while attempting to login" });
-//       }
-
-//       return res.status(200).json(user);
-//     });
-//   })(req, res);
-// });
-
 router.post("/localsignup", (req, res, next) => {
   const { username, password } = req.body
 
@@ -138,47 +119,41 @@ router.post("/facialsignup", (req, res) => {
   User.findOne({ username }, (err, user) => {
     if (user !== null) return res.json({ message: "This username is already taken."})
 
-    const newUser = new User({
-      username,
-      profileImg
-    });
-
     const app = new Clarifai.App({
       apiKey: process.env.clarifaiApiKey
     });
 
-    newUserLogin = (user, userData) => {
+    newUserLogin = (newUser) => {
       newUser.save().then(user=>{
-        req.login(user,() => res.json({ user, userData}))
+        req.login(user,() => res.json({ user }))
       })
     }
-
-    console.log('facial signup working until just before clarifai request')
 
     app.models.predict("c0c0ac362b03416da06ab3fa36fb58e3", profileImg)
       .then(res => {
         console.log('clarifai api working')
         const ageData = res.outputs[0].data.regions[0].data.face.age_appearance.concepts;
-        const age = (ageData.map(age => parseInt(age.name)).reduce((acc, val) => acc + val)/ageData.length);
+        const age = Math.round(ageData.map(age => parseInt(age.name)).reduce((acc, val) => acc + val)/ageData.length)
 
-        const gender = res.outputs[0].data.regions[0].data.face.gender_appearance.concepts[0].name
+        let gender = res.outputs[0].data.regions[0].data.face.gender_appearance.concepts[0].name
+        if (gender === "masculine") gender = "Male"
+        else gender = "Female"
 
-        let userData = {
-            age: age,
-            gender: gender
-          }
+        const newUser = new User({
+          username,
+          profileImg,
+          age,
+          gender
+        });
 
-        newUserLogin(user, userData)
+        newUserLogin(newUser)
       })
       .catch(err => {
-        console.log(err)
+        console.log("Error creating user" + err)
+        res.json({ message: "Uh oh, something went wrong."})
       })
-      
-    .catch(err => {
-      console.log("Error creating user" + err)
-      res.json({ message: "Uh oh, something went wrong."})
-    })
-  })
+    }
+  )
 })
 
 router.post("/logout", (req, res) => {

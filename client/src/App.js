@@ -9,7 +9,7 @@ import Protected from './components/Protected'
 
 // Homepages
 import Home from './containers/Homepages/Home'
-import UserHomePage from './containers/Homepages/UserHomePage';
+import UserHomepage from './containers/Homepages/UserHomepage';
 
 // Store Containers
 import MainStore from './containers/Store/MainStore';
@@ -63,7 +63,7 @@ class App extends React.Component {
                   path="/user"
                   redirectPath="/login"
                   user={this.state.user}
-                  component={UserHomePage}
+                  component={UserHomepage}
                   />
 
 
