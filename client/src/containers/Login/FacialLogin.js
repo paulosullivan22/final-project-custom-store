@@ -15,7 +15,7 @@ class FacialLogin extends React.Component {
     const username = window.location.href.split('/').reverse()[0]
     const imageSrc = this.webcam.getScreenshot()
 
-    axios.post(`/api/auth/faciallogin/${username}`, { image: imageSrc })
+    axios.post(`/api/auth/faciallogin`, { image: imageSrc, username })
       .then(res => {
         const { message } = res.data
         return (message) ? this.setState({ errorMessage: message }) : this.props.setUser(res.data)

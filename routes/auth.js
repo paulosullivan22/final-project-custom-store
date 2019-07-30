@@ -1,5 +1,4 @@
 const express = require("express");
-const passport = require('passport');
 const router = express.Router();
 const User = require("../models/User");
 const Clarifai = require('clarifai')
@@ -16,10 +15,10 @@ router.post('/login', (req, res) => {
   })
 })
 
-router.post('/faciallogin/:id', (req, res) => {
-  const { image } = req.body
+router.post('/faciallogin', (req, res) => {
+  const { image, username } = req.body
 
-  User.findOne({ username: req.params.id}, (err, user) => {
+  User.findOne({ username }, (err, user) => {
     if (err) console.log(err)
 
     const S3image = user.profileImg.split('/').reverse()[0]
@@ -53,12 +52,15 @@ router.post('/faciallogin/:id', (req, res) => {
       if (!data.FaceMatches.length) return res.json({ message: "Sorry, this photo doesn't look like the account user."})
 
       if (data.FaceMatches[0].Similarity > 95) {
-        return req.login(user,() => res.json(user))
-      } 
-
+        
+      
+      login = ( user, userData) => {
+        return req.login(user, () => res.json({ user, userData }))
+      }
 
       app.models.predict("c0c0ac362b03416da06ab3fa36fb58e3", {base64: image.replace(/^data:image\/\w+;base64,/, "")})
       .then(res => {
+        console.log('clarifai api working')
         const ageData = res.outputs[0].data.regions[0].data.face.age_appearance.concepts;
         const age = (ageData.map(age => parseInt(age.name)).reduce((acc, val) => acc + val)/ageData.length);
 
@@ -66,17 +68,22 @@ router.post('/faciallogin/:id', (req, res) => {
 
 
 
-        console.log(
-          {
+        let userData = {
             faceSimiliarity: data.FaceMatches[0].Similarity,
             age: age,
             gender: gender
           }
-        )
+
+        return login(user, userData)
+
       })
       .catch(err => {
         console.log(err)
       })
+
+
+
+    }
 
     });
   })

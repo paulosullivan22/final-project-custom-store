@@ -1,10 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const User = require("../models/User");
-const base64Img = require('base64-img');
-
-
-var aws = require('aws-sdk'); 
+const aws = require('aws-sdk'); 
 require('dotenv').config(); // Configure dotenv to load in the .env file
 
 aws.config.update({
@@ -43,15 +40,5 @@ const returnData = {
   });
 }
 )
-
-// router.post('/fileupload/base64', (req, res) => {
-//   const { image, username } = req.body;
-//   console.log(username)
-
-//   base64Img.img(image, './client/src/profileImage', `${username}_profile_photo`, (err, filepath) => {
-//     if (err) console.log(err)
-//     console.log(filepath)
-//   })
-// })
 
 module.exports = router
