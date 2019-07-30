@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-class LoginHome extends React.Component {
+class Login extends React.Component {
   state = {
     username: '',
     message: ''
@@ -49,4 +49,4 @@ class LoginHome extends React.Component {
   }
 }
 
-export default LoginHome
+export default Login

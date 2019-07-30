@@ -54,9 +54,10 @@ class MainStore extends React.Component {
 
   render() {
 
+    console.log("main store mounting")
+
     return (
       <div>
-
           <SearchBar searchChange={this.searchChange}/>
 
           <FilterChoices 

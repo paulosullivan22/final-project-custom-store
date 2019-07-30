@@ -6,9 +6,9 @@ class Home extends React.Component {
 
   componentDidMount() {
     axios.get("https://ipapi.co/json/")
-      .then(data => {
-        console.log(data.data.city)
-        axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${data.data.city}&APPID=200ec4f6bebf09606b0090d0fd497aff`)
+      .then(res => {
+        console.log(res.data.city)
+        axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${res.data.city}&APPID=200ec4f6bebf09606b0090d0fd497aff`)
           .then(data => console.log(data))
           .catch(err => console.log(err))
       })
@@ -17,7 +17,6 @@ class Home extends React.Component {
 
   render() {
 
-    console.log(this.props)
     return (
       <div className='home-container'>
         <div className='shape'>
@@ -25,7 +24,7 @@ class Home extends React.Component {
 
           <h1>Our future is a smart future.</h1>
           <Link to="/login">Login</Link>
-          <Link to="/signin">Signin</Link>
+          <Link to="/signup">Signup</Link>
         </div>
       </div>
     )

@@ -1,5 +1,5 @@
 import React from 'react';
-import FileUpload from './FileUpload';
+import FileUpload from '../../components/FileUpload';
 import Webcam from 'react-webcam'
 
 class FacialSignup extends React.Component {
