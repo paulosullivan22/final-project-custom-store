@@ -44,47 +44,12 @@ router.post('/faciallogin', (req, res) => {
 
     rekognition.compareFaces(params, (err, data) => {
       if (err) console.log('Error comparing faces: ' + err)
-      
-      const app = new Clarifai.App({
-        apiKey: process.env.clarifaiApiKey
-      });
 
       if (!data.FaceMatches.length) return res.json({ message: "Sorry, this photo doesn't look like the account user."})
 
       if (data.FaceMatches[0].Similarity > 95) {
-        
-      
-      login = ( user, userData) => {
-        return req.login(user, () => res.json({ user, userData }))
+        return req.login(user, () => res.json(user))
       }
-
-      app.models.predict("c0c0ac362b03416da06ab3fa36fb58e3", {base64: image.replace(/^data:image\/\w+;base64,/, "")})
-      .then(res => {
-        console.log('clarifai api working')
-        const ageData = res.outputs[0].data.regions[0].data.face.age_appearance.concepts;
-        const age = (ageData.map(age => parseInt(age.name)).reduce((acc, val) => acc + val)/ageData.length);
-
-        const gender = res.outputs[0].data.regions[0].data.face.gender_appearance.concepts[0].name
-
-
-
-        let userData = {
-            faceSimiliarity: data.FaceMatches[0].Similarity,
-            age: age,
-            gender: gender
-          }
-
-        return login(user, userData)
-
-      })
-      .catch(err => {
-        console.log(err)
-      })
-
-
-
-    }
-
     });
   })
 })
@@ -178,9 +143,36 @@ router.post("/facialsignup", (req, res) => {
       profileImg
     });
 
-    newUser.save().then(user=>{
-      req.login(user,() => res.json(user))
-    })
+    const app = new Clarifai.App({
+      apiKey: process.env.clarifaiApiKey
+    });
+
+    newUserLogin = (user, userData) => {
+      newUser.save().then(user=>{
+        req.login(user,() => res.json({ user, userData}))
+      })
+    }
+
+    console.log('facial signup working until just before clarifai request')
+
+    app.models.predict("c0c0ac362b03416da06ab3fa36fb58e3", profileImg)
+      .then(res => {
+        console.log('clarifai api working')
+        const ageData = res.outputs[0].data.regions[0].data.face.age_appearance.concepts;
+        const age = (ageData.map(age => parseInt(age.name)).reduce((acc, val) => acc + val)/ageData.length);
+
+        const gender = res.outputs[0].data.regions[0].data.face.gender_appearance.concepts[0].name
+
+        let userData = {
+            age: age,
+            gender: gender
+          }
+
+        newUserLogin(user, userData)
+      })
+      .catch(err => {
+        console.log(err)
+      })
       
     .catch(err => {
       console.log("Error creating user" + err)

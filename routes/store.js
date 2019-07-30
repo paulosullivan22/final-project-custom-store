@@ -3,7 +3,7 @@ const router = express.Router();
 const Inventory = require("../models/Inventory");
 const User = require("../models/User")
 
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
   Inventory.find()
     .then(inventory => {
       res.json(inventory)
@@ -11,6 +11,13 @@ router.get('/', (req, res) => {
     .catch(err => {
       res.json(err)
     })
+})
+
+router.get("/personalstore/:id", (req, res) => {
+  const { id } = req.params
+  console.log(id)
+
+  
 })
 
 router.post("/wishlist", (req, res) => {

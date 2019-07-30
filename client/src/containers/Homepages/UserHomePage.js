@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import Typed from 'typed.js'
+// import Typed from 'typed.js'
 
 class UserHomePage extends React.Component {
   state = {
@@ -25,7 +25,13 @@ class UserHomePage extends React.Component {
           .catch(err => console.log(err))
       })
       .catch(err => console.log(err))
-  }
+  
+
+    axios.get(`/api/store/personalstore/${this.props.user._id}`)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+
+    }
 
   render() {
     return (
