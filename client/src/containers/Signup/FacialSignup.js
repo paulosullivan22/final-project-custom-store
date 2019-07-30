@@ -7,7 +7,14 @@ class FacialSignup extends React.Component {
     image: '',
     username: '',
     errorMessage: '',
-    uploadImg: ''
+    uploadImg: '',
+    mobile: false
+  }
+
+  componentDidMount() {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+      this.setState({ mobile: true })
+     }
   }
 
   handleChange = e => {
@@ -107,6 +114,11 @@ class FacialSignup extends React.Component {
 
         {(this.state.errorMessage.length) ? 
           <div>{this.state.errorMessage}</div> :
+          null
+        }
+
+        {(this.state.mobile) ? 
+          <div>Visiting on mobile device</div> :
           null
         }
 
