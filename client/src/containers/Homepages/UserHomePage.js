@@ -11,6 +11,8 @@ class UserHomepage extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props.user)
+
     axios.get("https://ipapi.co/json/")
       .then(res => {
         this.setState({ city: res.data.city })
@@ -37,12 +39,22 @@ class UserHomepage extends React.Component {
           wishlistColors = this.props.user.wishlist.map(item => item.color)
         }
 
-        let personalInventory = res.data.filter(item=>{
+        let personalInventory = []
+        
+        if (wishlistCategories.length) {
+          personalInventory = res.data.filter(item => {
           return this.props.user.gender === item.gender &&
             (wishlistCategories.includes(item.category) ||
              wishlistColors.includes(item.color) ||
             (item.ageRange === this.props.user.age))
-        })
+          }) 
+        } else {
+          personalInventory = res.data.filter(
+            item => {
+              return this.props.user.gender === item.gender
+            }
+          )
+        }
 
         const shuffle = (array = res.data) => {
           var j, x, i;
@@ -57,7 +69,7 @@ class UserHomepage extends React.Component {
 
       let shuffledInventory = shuffle(personalInventory)
 
-        this.setState({ inventory: shuffledInventory })
+      this.setState({ inventory: shuffledInventory })
       })
       .catch(err => {
         console.log(err)

@@ -82,7 +82,7 @@ router.post("/emaillogin", (req, res) => {
 })
 
 router.post("/localsignup", (req, res, next) => {
-  const { username, password } = req.body
+  const { username, gender, password } = req.body
 
   if (username === "" || password === "") {
     return res.json({ message: "Please submit both fields."});
@@ -98,6 +98,7 @@ router.post("/localsignup", (req, res, next) => {
 
     const newUser = new User({
       username,
+      gender,
       password: hashPass
     });
 

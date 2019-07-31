@@ -18,10 +18,12 @@ let users = [
   {
     username: "alice",
     password: bcrypt.hashSync("alice", bcrypt.genSaltSync(bcryptSalt)),
+    gender: "Female",
     profileImg: "https://static1.squarespace.com/static/55550428e4b0d770e3f981ab/t/5c8485c0f4e1fc79d4f506b7/1531332941077/Happy+Hour+Headshot+Philadelphia+Headshots?format=1000w"
   },
   {
     username: "bob",
+    gender: "Male",
     password: bcrypt.hashSync("bob", bcrypt.genSaltSync(bcryptSalt)),
   }
 ]

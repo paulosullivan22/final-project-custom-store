@@ -2,16 +2,10 @@ import React from 'react'
 import WishlistRemove from './../../components/WishListRemove'
 
 class Wishlist extends React.Component {
-  // state = {
-  //   wishlistChange: false
-  // }
-  
-  // removedItem = () => {
-  //   this.props.setUser({...this.props.user})
-  //   this.setState({ wishlistChange: !this.state.wishlistChange })
-  // }
+
 
   render() {
+
     return (
       <div>
         

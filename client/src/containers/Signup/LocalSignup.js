@@ -5,24 +5,32 @@ class LocalSignup extends React.Component {
   state = {
     username: '',
     password: '',
+    gender: 'Male',
     message: ''
   }
   
   handleChange = e => {
-    const { name, value } = e.target
+    let { name, value } = e.target
+
+    if (value === "Not specified") value = ''
 
     this.setState({ 
       [name]: value
     })
+
+
   }
 
   handleSubmit = e => {
     e.preventDefault()
 
+    console.log(e)
+
     axios
       .post("/api/auth/localsignup", {
         username: this.state.username,
-        password: this.state.password
+        password: this.state.password,
+        gender: this.state.gender
       })
       .then((response) => {
         console.log(response.data)
@@ -50,6 +58,13 @@ class LocalSignup extends React.Component {
               name='username'
               onChange={this.handleChange}
               />
+
+            <label htmlFor='gender'>Gender: </label> 
+            <select name="gender" onChange={this.handleChange}>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Not specified">Not specified</option>
+            </select>
 
             <label htmlFor='password'>Password: </label> 
             <input 
