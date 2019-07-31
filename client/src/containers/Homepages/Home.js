@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 class Home extends React.Component {
 
@@ -11,8 +10,7 @@ class Home extends React.Component {
 
 
           <h1>Our future is a smart future.</h1>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Signup</Link>
+ 
         </div>
       </div>
     )

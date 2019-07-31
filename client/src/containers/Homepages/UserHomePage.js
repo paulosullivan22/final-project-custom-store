@@ -16,7 +16,7 @@ class UserHomepage extends React.Component {
     axios.get("https://ipapi.co/json/")
       .then(res => {
         this.setState({ city: res.data.city })
-        axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${res.data.city}&APPID=200ec4f6bebf09606b0090d0fd497aff`)
+        axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${res.data.city}&APPID=200ec4f6bebf09606b0090d0fd497aff`)
           .then(data => {
             console.log((data.data.main.temp - 273.15))
             this.setState({
