@@ -20,22 +20,36 @@ const Navbar = props => {
     <nav>
       <ul>
         <li>
-          <Link to='/'>Home</Link>
+          <Link 
+            className="nav-item" 
+            to='/'>Home</Link>
+        </li>
           {(props.user) ?
           <>
-            <Link to='/store'>Main Store</Link>
-            <Link to='/wishlist'>Wishlist</Link>
+          <li>
+            <Link 
+              className="nav-item" 
+              to='/store'>Main Store</Link>
+          </li>
+          <li>
+            <Link 
+              className="nav-item" 
+              to='/wishlist'>Wishlist</Link>
+          </li>
           </> :
-          null }
-        </li>
+          null } 
 
         {!props.user ? (
             <>
               <li>
-                <Link to='/login'>Login</Link>
+                <Link 
+                  className="nav-item" 
+                  to='/login'>Login</Link>
               </li>
               <li>
-                <Link to='/signup'>Signup</Link>
+                <Link 
+                  className="nav-item" 
+                  to='/signup'>Signup</Link>
               </li>
             </>
 
@@ -43,10 +57,15 @@ const Navbar = props => {
 
             <>
               <li>
-                <Link to='/user'>Profile</Link>
+                <Link 
+                  className="nav-item" 
+                  to='/user'>Profile</Link>
               </li>
               <li>
-                <Link onClick={() => handleLogout(props)} to='/logout'>Logout</Link>
+                <Link 
+                  className="nav-item" 
+                  onClick={() => handleLogout(props)} 
+                  to='/logout'>Logout</Link>
               </li>
             </>
             

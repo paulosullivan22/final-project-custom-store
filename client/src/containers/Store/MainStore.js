@@ -56,12 +56,20 @@ class MainStore extends React.Component {
   render() {
 
     return (
-      <div>
-          <SearchBar searchChange={this.searchChange}/>
+      <div className="store-body-container">
+
+          <h1>Main Store</h1>
+
+          <hr />
 
           <FilterChoices 
             inventory={this.state.originalInventory} 
             filterChange={this.filterChange}
+            />
+
+          <SearchBar
+            className="search-bar-container" 
+            searchChange={this.searchChange}
             />
 
           <div className="store-container">

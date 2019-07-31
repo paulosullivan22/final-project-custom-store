@@ -1,20 +1,37 @@
-@import url(//db.onlinewebfonts.com/c/1725aaa429e4045ba648a1aa73481440?family=FolioW01-Light);
-@import './MainStore.scss';
-@import './Home.scss';
+@import './containers/MainStore.scss';
+@import './containers/Home.scss';
+
+@import './components/InventoryLayout.scss';
+@import './components/Navbar.scss';
+@import './components/FilterChoices.scss';
+@import './components//Searchbar.scss';
+
+
+@font-face {
+  font-family: 'New York';
+  src: url('./fonts/NewYork-Regular12.woff2') format('woff2'),
+      url('./fonts/NewYork-Regular12.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
 
 
 body {
   padding: 0;
   margin: 0;
-  font-family: "FolioW01-Light"
+  font-family: "New York"
 
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, li, p, ul {
   margin: 0;
   padding: 0
 }
 
-p {
+p, .nav-item {
   font-size: 12px;
+}
+
+.app-body {
+  padding-top: 40px;
 }

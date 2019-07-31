@@ -45,8 +45,9 @@ class App extends React.Component {
 
               <Navbar setUser={this.setUser} user={this.state.user} /> 
 
-              <Switch>
+              <div className="app-body">
 
+              <Switch>
 
                 {/* Homepage Routes */}
 
@@ -153,6 +154,7 @@ class App extends React.Component {
                   />
 
               </Switch>
+              </div>
 
           </div>
     )

@@ -1,0 +1,25 @@
+.filter-choices-container {
+  text-align: center;
+
+  h3 {
+    margin: 15px 0 5px;
+  }
+
+  ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+
+    li {
+      font-size: 14px;
+      border: 1px solid white;
+      padding: 3px 7px;
+    }
+
+    li:hover {
+      border: 1px solid black;
+    }
+
+  }
+
+}

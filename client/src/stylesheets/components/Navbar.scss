@@ -1,0 +1,37 @@
+nav {
+  background-color: rgb(245, 245, 245);
+  height: 40px;
+  position: fixed;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  
+  ul {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    
+
+    li {
+      margin-left: 20px;
+
+      .nav-item {
+        box-sizing: border-box;
+        text-decoration: none;
+        color: black;
+        padding: 3px 7px;
+        border: 1px solid rgb(245, 245, 245);
+      }
+
+      .nav-item:hover {
+        border: 1px solid black;
+      }
+
+      .nav-item:visited {
+        background-color: black;
+      }
+    }
+  }
+
+}
