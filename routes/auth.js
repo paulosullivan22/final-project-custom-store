@@ -18,8 +18,12 @@ router.post('/login', (req, res) => {
 router.post('/faciallogin', (req, res) => {
   const { image, username } = req.body
 
+  console.log("Axios request received")
+
   User.findOne({ username }, (err, user) => {
     if (err) console.log(err)
+    console.log("User found")
+
 
     const S3image = user.profileImg.split('/').reverse()[0]
     
@@ -43,6 +47,7 @@ router.post('/faciallogin', (req, res) => {
     })
 
     rekognition.compareFaces(params, (err, data) => {
+      console.log("AWS received request")
       if (err) console.log('Error comparing faces: ' + err)
 
       if (!data.FaceMatches.length) return res.json({ message: "Sorry, this photo doesn't look like the account user."})

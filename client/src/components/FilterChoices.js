@@ -32,7 +32,7 @@ class FilterChoices extends React.Component {
     return (
         <div className="filter-choices-container">
 
-          <h3>Filter</h3>
+          <h2>Filters</h2>
 
           <ul>
 

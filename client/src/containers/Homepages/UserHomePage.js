@@ -1,30 +1,17 @@
 import React from 'react'
 import axios from 'axios'
 import WishlistButton from './../../components/WishlistButton'
-// import Typed from 'typed.js'
 
 class UserHomepage extends React.Component {
   state = {
     city: '',
-    temp: '',
     inventory: []
   }
 
   componentDidMount() {
-    console.log(this.props.user)
-
     axios.get("https://ipapi.co/json/")
       .then(res => {
-        this.setState({ city: res.data.city })
-        axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${res.data.city}&APPID=200ec4f6bebf09606b0090d0fd497aff`)
-          .then(data => {
-            console.log((data.data.main.temp - 273.15))
-            this.setState({
-              city: res.data.city,
-              temp: (data.data.main.temp - 273.15).toFixed(1)
-            })
-            console.log(this.state)
-          })
+        this.setState({ city: ` from ${res.data.city}` })
       })
       .catch(err => console.log(err))
 
@@ -79,12 +66,18 @@ class UserHomepage extends React.Component {
     
 
   render() {
+
     return (
-      <div>
+      <div className="user-homepage-container" class={(this.props.user.gender === "Male") ? "male-background" : "female-background"}>
+      
+        <div className="user-homepage-content">
 
-        <h1>Welcome from {this.state.city} where the temperature is {this.state.temp}°C</h1>
+          <h1>Hello, {this.props.user.username}.</h1>
+          <h3>Welcome{this.state.city}.</h3>
+          <h4>This is a collection that we think you will love, personalised just for you.</h4>
 
-        <h2>Your recommended collection: </h2>
+        </div>
+
 
         <div className="store-container">
           {(!this.state.inventory.length) ? 

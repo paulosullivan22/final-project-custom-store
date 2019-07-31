@@ -28,18 +28,27 @@ class Login extends React.Component {
   render() {
 
     return (
-      <div>
+      <div className="auth-container">
 
         <h1>Login</h1>
 
-          <label htmlFor="username">Enter your username</label>
+          <p>Please enter your username:</p>
           <input type="text" name="username" onChange={this.handleChange} />
 
-          <button onClick={() => this.handleClick("facial")}>Facial Login</button>
-          <button onClick={() => this.handleClick("email")}>Password Login</button>
+          <button 
+            className="button auth-button"
+            onClick={() => this.handleClick("facial")}>
+              Facial Login
+              </button>
+
+          <button 
+            className="button auth-button"
+            onClick={() => this.handleClick("email")}>
+              Password Login
+              </button>
 
           {(this.state.message.length) ? 
-            <div>{this.state.message}</div> : null
+            <button className="error-message">{this.state.message}</button> : null
             }
 
       </div>

@@ -40,8 +40,10 @@ class LocalLogin extends React.Component {
 
   render() {
       return (
-        <div>
-          Login
+        <div className="auth-container">
+          
+          <h1>Login</h1>
+
           <form onSubmit={this.handleSubmit}>
 
             <label htmlFor='password'>Password: </label> 
@@ -52,19 +54,18 @@ class LocalLogin extends React.Component {
               />
 
             <button 
+            className="auth-button"
               type='submit'
               >
               Submit
               </button>
 
               {(this.state.message) ? 
-                  <div>{this.state.message}</div> :
+                  <button className="error-message">{this.state.message}</button> :
                   null
                   }
 
           </form>
-
-          <a href="/auth/facebook"><button>Sign in with Facebook</button></a>
 
         </div>
       )

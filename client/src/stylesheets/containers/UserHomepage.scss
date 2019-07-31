@@ -1,0 +1,16 @@
+
+.user-homepage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .user-homepage-content {
+    margin: 40px;
+    text-align: center;
+
+    * {
+      margin: 15px;
+    }
+  }
+  
+}

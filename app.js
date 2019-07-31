@@ -37,8 +37,8 @@ const app = express();
 
 // Middleware Setup
 app.use(logger("dev"));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb', extended:false}));
 app.use(cookieParser());
 
 // Express View engine setup
@@ -75,7 +75,6 @@ app.use(passport.session())
 
 // default value for title local
 app.locals.title = "Express - Generated with IronGenerator";
-
 
 
 const index = require("./routes/index");

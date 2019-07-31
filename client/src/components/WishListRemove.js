@@ -19,7 +19,11 @@ class WishlistRemove extends React.Component {
 
   render() {
     return (
-        <button onClick={() => this.handleClick()}>Remove from wishlist</button>
+        <button 
+          className="wishlist-button"  
+          onClick={() => this.handleClick()}>
+            Remove from wishlist
+            </button>
     )
   }
 }

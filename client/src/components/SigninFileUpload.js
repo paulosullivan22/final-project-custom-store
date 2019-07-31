@@ -15,7 +15,21 @@ class FileUpload extends Component {
 
     let file = this.uploadInput.files[0] 
 
-    this.props.exportFile(file)
+    const getBase64 = (file) => {
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        console.log(reader.result);
+        this.props.exportFile(reader.result)
+      };
+      reader.onerror = function (error) {
+        console.log('Error: ', error);
+      };
+   }
+   
+   getBase64(file);
+
+    
   }
   
   render() {
@@ -23,11 +37,25 @@ class FileUpload extends Component {
     return (
       <div className="App">
         <center>
-          <h1>UPLOAD A FILE</h1>
-          {this.state.success ? <h3>Success</h3> : null}
-          <input onChange={this.handleChange} ref={(ref) => { this.uploadInput = ref; }} type="file"/>
+          <hr />
+          <h4>Or</h4>
+          <hr />
+          <label 
+            htmlFor="file"
+            className="auth-button file-choice"
+            >Choose a file</label>
+          <input 
+            onChange={this.handleChange} 
+            ref={(ref) => { this.uploadInput = ref; }} 
+            type="file"
+            name="file"
+            className="input-file"
+            id="file"
+            />
           <br/>
-          <button onClick={this.handleUpload}>UPLOAD</button>
+          <button 
+            className="auth-button login-button"
+            onClick={this.handleUpload}>Login</button>
         </center>
       
       </div>

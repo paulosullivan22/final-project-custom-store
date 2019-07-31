@@ -7,11 +7,15 @@ class Wishlist extends React.Component {
   render() {
 
     return (
-      <div>
+      <div className="wishlist-container">
+
+        <h1>Wishlist</h1>
+        
+        <hr />
         
         {(!this.props.user.wishlist.length) ? 
 
-        (<div>Visit the store to add to your wishlist</div>) : 
+        (<div className="empty-wishlist-message">Visit the store to add to your wishlist.</div>) : 
         
         (<div className="store-container">
 

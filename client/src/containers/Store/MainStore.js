@@ -13,8 +13,13 @@ class MainStore extends React.Component {
   searchChange = e => {
     console.log(this.state.inventory)
     const filteredInventory = this.state.originalInventory.filter(
-      item => item.name.toLowerCase().includes(e.target.value.toLowerCase())
+      item => {
+        return (item.name.toLowerCase().includes(e.target.value.toLowerCase() ||
+        item.gender.toLowerCase() === e.target.value.toLowerCase()))
+      }
     )
+
+    
 
     this.setState({
       inventory: filteredInventory
@@ -25,11 +30,25 @@ class MainStore extends React.Component {
     console.log(filter)
 
     let inventory = this.state.originalInventory.filter(item=>{
-      return filter.includes(item.category.toLowerCase()) ||
-            filter.includes(item.gender.toLowerCase())
+      return filter.includes(item.category.toLowerCase()) 
     })
+    
+    if(inventory.length === 0){
+      inventory = this.state.originalInventory
+    }
+
+    if(filter.includes("male")){
+      console.log("male")
+    inventory = inventory.filter(item=>item.gender === "Male") 
+    }
+
+    if(filter.includes("female")){
+      console.log("female")
+    inventory = inventory.filter(item=>item.gender === "Female")
+    }
+
     console.log(inventory)
-    if (!inventory.length) inventory = this.state.originalInventory
+     if (!inventory.length) inventory = this.state.originalInventory
     this.setState({
       inventory
     })
@@ -68,13 +87,12 @@ class MainStore extends React.Component {
             />
 
           <SearchBar
-            className="search-bar-container" 
             searchChange={this.searchChange}
             />
 
           <div className="store-container">
           {(!this.state.inventory.length) ? 
-            (<div>Loading</div>) :
+            (<div>There are no items available for your search term.</div>) :
             
             (<div className="item-container">
             {this.state.inventory.map(item => {

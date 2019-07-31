@@ -48,8 +48,10 @@ class LocalSignup extends React.Component {
 
   render() {
       return (
-        <div>
-          Signup
+        <div className="auth-container">
+          
+          <h1>Sign up</h1>
+
           <form onSubmit={this.handleSubmit}>
 
             <label htmlFor='username'>Username: </label> 
@@ -74,13 +76,14 @@ class LocalSignup extends React.Component {
               />
 
             <button 
+              className="auth-button"
               type='submit'
               >
               Submit
               </button>
 
               {(this.state.message) ? 
-                  <div>{this.state.message}</div> :
+                  <button className="error-message">{this.state.message}</button> :
                   null
                   }
 

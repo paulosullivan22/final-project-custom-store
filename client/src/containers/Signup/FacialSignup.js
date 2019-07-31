@@ -46,6 +46,7 @@ class FacialSignup extends React.Component {
       errorMessage: "Please enter a username"
     })
     const image = this.webcam.getScreenshot()
+    console.log(image)
     const uploadImg = image.replace(/^data:image\/\w+;base64,/, "") 
     const username = this.state.username
 
@@ -80,7 +81,7 @@ class FacialSignup extends React.Component {
     }
 
     return (
-      <div>
+      <div className="facial-auth-container">
 
         <label htmlFor="username">Username: </label>
         <input type='text' name='username' onChange={this.handleChange} />
@@ -113,7 +114,7 @@ class FacialSignup extends React.Component {
           />
 
         {(this.state.errorMessage.length) ? 
-          <div>{this.state.errorMessage}</div> :
+          <button className="error-message">{this.state.errorMessage}</button> :
           null
         }
 

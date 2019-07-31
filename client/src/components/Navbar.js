@@ -17,62 +17,64 @@ const handleLogout = props => {
 
 const Navbar = props => {
   return (
-    <nav>
-      <ul>
-        <li>
-          <Link 
-            className="nav-item" 
-            to='/'>Home</Link>
-        </li>
-          {(props.user) ?
-          <>
+    <div className="nav-container">
+      <nav>
+        <ul>
           <li>
             <Link 
               className="nav-item" 
-              to='/store'>Main Store</Link>
+              to='/'>Home</Link>
           </li>
-          <li>
-            <Link 
-              className="nav-item" 
-              to='/wishlist'>Wishlist</Link>
-          </li>
-          </> :
-          null } 
-
-        {!props.user ? (
+            {(props.user) ?
             <>
-              <li>
-                <Link 
-                  className="nav-item" 
-                  to='/login'>Login</Link>
-              </li>
-              <li>
-                <Link 
-                  className="nav-item" 
-                  to='/signup'>Signup</Link>
-              </li>
-            </>
+            <li>
+              <Link 
+                className="nav-item" 
+                to='/store'>Main Store</Link>
+            </li>
+            <li>
+              <Link 
+                className="nav-item" 
+                to='/wishlist'>Wishlist</Link>
+            </li>
+            </> :
+            null } 
 
-        ) : (
+          {!props.user ? (
+              <>
+                <li>
+                  <Link 
+                    className="nav-item" 
+                    to='/login'>Login</Link>
+                </li>
+                <li>
+                  <Link 
+                    className="nav-item" 
+                    to='/signup'>Signup</Link>
+                </li>
+              </>
 
-            <>
-              <li>
-                <Link 
-                  className="nav-item" 
-                  to='/user'>Profile</Link>
-              </li>
-              <li>
-                <Link 
-                  className="nav-item" 
-                  onClick={() => handleLogout(props)} 
-                  to='/logout'>Logout</Link>
-              </li>
-            </>
-            
-        )}
+          ) : (
 
-      </ul>
-    </nav>
+              <>
+                <li>
+                  <Link 
+                    className="nav-item" 
+                    to='/user'>Profile</Link>
+                </li>
+                <li>
+                  <Link 
+                    className="nav-item" 
+                    onClick={() => handleLogout(props)} 
+                    to='/logout'>Logout</Link>
+                </li>
+              </>
+              
+          )}
+
+        </ul>
+      </nav>
+    </div>
   )
 }
 

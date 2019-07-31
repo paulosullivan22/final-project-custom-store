@@ -1,0 +1,18 @@
+.facial-auth-container {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  margin: 70px 0;
+
+  hr {
+    width: 100px;
+    margin: 20px;
+  }
+
+  .title-hr {
+    width: 200px;
+  }
+
+}

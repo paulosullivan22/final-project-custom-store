@@ -1,0 +1,55 @@
+.wishlist-button {
+  border: 1px solid black;
+  outline: none;
+
+}
+
+.wishlist-button:hover {
+  background-color: black;
+  color: white;
+}
+
+.wishlist-button:active {
+  background-color: rgb(168, 181, 172);
+  color: black
+}
+
+.auth-button {
+  outline: none;
+  font-size: 13px;
+  padding: 10px 14px;
+  width: 200px;
+  margin: 10px;
+  background-color: #efefef;
+  border: 1px solid black;
+
+}
+
+.auth-button:hover {
+  cursor: pointer;
+  color: white;
+  background-color: black;
+}
+
+.signup-auth {
+  .signup-link {
+    text-decoration: none;
+    color: black;
+    }
+}
+
+.signup-auth:hover {
+  .signup-link {
+    color: white;
+  }
+}
+
+.login-button {
+  color: white;
+  background-color: black;
+}
+
+.login-button:hover {
+  color: black;
+  background-color: #efefef;
+}

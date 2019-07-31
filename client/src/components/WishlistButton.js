@@ -18,7 +18,11 @@ class WishlistButton extends React.Component {
 
   render() {
     return (
-        <button onClick={() => this.handleClick()}>Add to wishlist</button>
+        <button 
+          className="wishlist-button"
+          onClick={() => this.handleClick()}>
+            Add to wishlist
+            </button>
     )
   }
 }

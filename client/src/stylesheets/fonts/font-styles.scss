@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'New York';
+  src: url('./fonts/NewYork-Regular12.woff2') format('woff2'),
+      url('./fonts/NewYork-Regular12.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "New York"
+
+}
+
+h1, h2, h3, h4, h5, h6, li, p, ul {
+  margin: 0;
+  padding: 0
+}
+
+p {
+  font-size: 12px;
+}

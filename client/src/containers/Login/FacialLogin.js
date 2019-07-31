@@ -11,8 +11,11 @@ class FacialLogin extends React.Component {
 
   importUploadedFile = file => {
     // const username = window.location.href.split('/').reverse()[0]
-
-    console.log(file)
+    const username = window.location.href.split('/').reverse()[0]
+    console.log("File: " + file)
+    axios.post("/api/auth/faciallogin", { username: username, image: file })
+      .then(res => this.props.setUser(res.data))
+      .catch(err => console.log(err))
   }
 
 
@@ -42,8 +45,11 @@ class FacialLogin extends React.Component {
       }
 
       return (
-        <div>
+        <div className="facial-auth-container">
           
+          <h1>Facial Login</h1>
+          <hr className="title-hr"/>
+
           <Webcam
             audio={false}
             height={350}
@@ -52,10 +58,13 @@ class FacialLogin extends React.Component {
             width={350}
             videoConstraints={videoConstraints}
           />
-          <button onClick={this.capture}>Capture photo</button>
+          <button 
+            className="auth-button"
+            onClick={this.capture}>
+              Capture photo</button>
 
           {(this.state.errorMessage) ? 
-            <div>{this.state.errorMessage}</div> : null
+            <button className="error-message">{this.state.errorMessage}</button> : null
           }
 
           <SigninFileUpload
