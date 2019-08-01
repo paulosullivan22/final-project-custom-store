@@ -80,27 +80,45 @@ class FacialSignup extends React.Component {
     return (
       <div className="facial-auth-container">
 
-        <label htmlFor="username">Username: </label>
+        <h1>Facial Signup</h1>
+        <hr className="title-hr"/>
+
+        <p>Please enter a username:</p>
         <input type='text' name='username' onChange={this.handleChange} />
+
+        {(this.state.errorMessage.length) ? 
+          <button className="error-message">{this.state.errorMessage}</button> :
+          null
+        }
           
-        {(this.state.image.length) ? 
-          (<img src={this.state.image} width="350px" alt="profile" />) : 
-          (
-          <>
-            <Webcam
-              audio={false}
-              height={350}
-              ref={this.setRef}
-              screenshotFormat="image/jpeg"
-              width={350}
-              videoConstraints={videoConstraints}
-            />
-            <button onClick={this.capture}>Capture photo</button>
-          </>
+        {(this.state.image.length) ?  // checks if a photo has been taken, removes webcam if true
+          (<img 
+            className="captured-photo"
+            src={this.state.image} 
+            width="350px" 
+            alt="profile" />) 
+          : 
+          (this.state.mobile ? 
+              null 
+              :
+              <>
+                <Webcam
+                  audio={false}
+                  height={350}
+                  ref={this.setRef}
+                  screenshotFormat="image/jpeg"
+                  width={350}
+                  videoConstraints={videoConstraints}
+                />
+                <button 
+                  className="auth-button"
+                  onClick={this.capture}>Capture photo</button>
+              </>
+            
           )
         }
 
-        <h1>OR</h1> 
+        
 
         <FileUpload 
           username={this.state.username} 
@@ -109,16 +127,6 @@ class FacialSignup extends React.Component {
           redirect={this.redirect}
           setUser={this.props.setUser}
           />
-
-        {(this.state.errorMessage.length) ? 
-          <button className="error-message">{this.state.errorMessage}</button> :
-          null
-        }
-
-        {(this.state.mobile) ? 
-          <div>Visiting on mobile device</div> :
-          null
-        }
 
       </div>
     )

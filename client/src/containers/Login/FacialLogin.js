@@ -67,7 +67,7 @@ class FacialLogin extends React.Component {
             }
 
           <button 
-            className="auth-button"
+            className="auth-button" id="facial-login-capture"
             onClick={this.capture}>
               Capture photo & login</button>
 

@@ -58,13 +58,27 @@ class FileUpload extends Component {
   render() {
 
     return (
-      <div className="App">
+      <div>
         <center>
-          <h1>UPLOAD A FILE</h1>
-          {this.state.success ? <h3>Success</h3> : null}
-          <input onChange={this.handleChange} ref={(ref) => { this.uploadInput = ref; }} type="file"/>
+          <hr />
+          <h4>Or</h4>
+          <hr />
+          <label 
+            htmlFor="file"
+            className="auth-button file-choice"
+            >Choose a file</label>
+          <input 
+            onChange={this.handleChange} 
+            ref={(ref) => { this.uploadInput = ref; }} 
+            type="file"
+            name="file"
+            className="input-file"
+            id="file"
+            />
           <br/>
-          <button onClick={this.handleUpload}>UPLOAD</button>
+          <button 
+            className="auth-button login-button"
+            onClick={this.handleUpload}>Submit</button>
         </center>
       
       </div>
