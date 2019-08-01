@@ -18,45 +18,44 @@ router.post('/login', (req, res) => {
 router.post('/faciallogin', (req, res) => {
   const { image, username } = req.body
 
-  console.log("Axios request received")
+    User.findOne({ username }, (err, user) => {
+      if (err) console.log(err)
 
-  User.findOne({ username }, (err, user) => {
-    if (err) console.log(err)
-    console.log("User found")
-
-
-    const S3image = user.profileImg.split('/').reverse()[0]
-    
-    var params = {
-      SimilarityThreshold: 90, 
-      SourceImage: {
-        Bytes: Buffer.from(image.replace(/^data:image\/\w+;base64,/, ""), 'base64')
-      }, 
-      TargetImage: {
-      S3Object: {
-        Bucket: "project3profileimages", 
-        Name: `${S3image}`
+      const S3image = user.profileImg.split('/').reverse()[0]
+      
+      var params = {
+        SimilarityThreshold: 90, 
+        SourceImage: {
+          Bytes: Buffer.from(image.replace(/^data:image\/\w+;base64,/, ""), 'base64')
+        }, 
+        TargetImage: {
+        S3Object: {
+          Bucket: "project3profileimages", 
+          Name: `${S3image}`
+          }
         }
-      }
-    };
+      };
 
-    let rekognition = new AWS.Rekognition({ 
-      accessKeyId: process.env.AWSAccessKeyId,
-      secretAccessKey: process.env.AWSSecretKey,
-      region: process.env.AWS_REGION
+      let rekognition = new AWS.Rekognition({ 
+        accessKeyId: process.env.AWSAccessKeyId,
+        secretAccessKey: process.env.AWSSecretKey,
+        region: process.env.AWS_REGION
+      })
+
+      rekognition.compareFaces(params, (err, data) => {
+        console.log("AWS received request")
+        if (err) return res.json({ message: "Sorry, that photo didn't come up as a match for the account holder."})
+
+        if (!data || !data.FaceMatches.length ) {
+          return res.json({ 
+            message: "Sorry, there aren't any faces in this photo that match the account holder." 
+          })
+        } else if (data.FaceMatches[0].Similarity > 95) {
+          console.log("face match successfuly")
+          return req.login(user, () => res.json(user))
+        }
+      });
     })
-
-    rekognition.compareFaces(params, (err, data) => {
-      console.log("AWS received request")
-      if (err) console.log('Error comparing faces: ' + err)
-
-      if (!data.FaceMatches.length) return res.json({ message: "Sorry, this photo doesn't look like the account user."})
-
-      if (data.FaceMatches[0].Similarity > 95) {
-        return req.login(user, () => res.json(user))
-      }
-    });
-  })
 })
 
 router.post("/emaillogin", (req, res) => {
@@ -129,6 +128,10 @@ router.post("/facialsignup", (req, res) => {
       apiKey: process.env.clarifaiApiKey
     });
 
+    noFaceDetected = () => {
+      return res.json({ message: "Sorry, there was no face detected in this photo."})
+    }
+
     newUserLogin = (newUser) => {
       newUser.save().then(user=>{
         req.login(user,() => res.json(user))
@@ -137,6 +140,9 @@ router.post("/facialsignup", (req, res) => {
 
     app.models.predict("c0c0ac362b03416da06ab3fa36fb58e3", profileImg)
       .then(res => {
+
+        console.log("Clarifai face data: ")
+        if (!res.outputs[0].data.regions) return noFaceDetected()
         const ageData = res.outputs[0].data.regions[0].data.face.age_appearance.concepts;
         const age = Math.round(ageData.map(age => parseInt(age.name)).reduce((acc, val) => acc + val)/ageData.length)
 

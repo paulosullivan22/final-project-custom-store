@@ -33,22 +33,26 @@ class MainStore extends React.Component {
       return filter.includes(item.category.toLowerCase()) 
     })
     
-    if(inventory.length === 0){
+    if (inventory.length === 0) {
       inventory = this.state.originalInventory
     }
 
-    if(filter.includes("male")){
-      console.log("male")
-    inventory = inventory.filter(item=>item.gender === "Male") 
+    if (filter.includes("male")) {
+      inventory = inventory.filter(item=>item.gender === "Male") 
     }
 
-    if(filter.includes("female")){
-      console.log("female")
-    inventory = inventory.filter(item=>item.gender === "Female")
+    if (filter.includes("female")) {
+      inventory = inventory.filter(item=>item.gender === "Female")
     }
 
     console.log(inventory)
      if (!inventory.length) inventory = this.state.originalInventory
+
+     if (filter.includes("male") && filter.includes("female")) {
+      console.log('both')
+      inventory = []
+    }
+
     this.setState({
       inventory
     })

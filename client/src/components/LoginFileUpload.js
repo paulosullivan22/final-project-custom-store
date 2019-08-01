@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class FileUpload extends Component {
+class LoginFileUpload extends Component {
    state = {
       success : false,
       url : ""
@@ -19,7 +19,6 @@ class FileUpload extends Component {
       var reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
-        console.log(reader.result);
         this.props.exportFile(reader.result)
       };
       reader.onerror = function (error) {
@@ -62,4 +61,4 @@ class FileUpload extends Component {
     );
   }
 }
-export default FileUpload;
+export default LoginFileUpload;

@@ -13,7 +13,10 @@ class FacialSignup extends React.Component {
 
   componentDidMount() {
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+      console.log('mobile')
       this.setState({ mobile: true })
+     } else {
+       console.log("desktop")
      }
   }
 
@@ -29,12 +32,12 @@ class FacialSignup extends React.Component {
     })
   }
 
-  redirect = (bool, user) => {
+  redirect = (bool, response) => {
     if (bool) {
-      this.props.setUser(user)
-      this.props.history.push('/')
+      this.props.setUser(response)
+      this.props.history.push('/user')
     }
-    else this.setState({ errorMessage: "This username is already taken" })
+    else this.setState({ errorMessage: response })
   }
 
   setRef = webcam => {
@@ -46,7 +49,6 @@ class FacialSignup extends React.Component {
       errorMessage: "Please enter a username"
     })
     const image = this.webcam.getScreenshot()
-    console.log(image)
     const uploadImg = image.replace(/^data:image\/\w+;base64,/, "") 
     const username = this.state.username
 
@@ -59,17 +61,12 @@ class FacialSignup extends React.Component {
 
       fd.append('image', blob, 'name')
 
-      console.log(blob)
-
       this.setState({
         uploadImg: blob
-      })
-
-      console.log(this.state)
-    
+      })    
     })
 
-    this.setState({ image, uploadImg }, () => console.log(this.state))
+    this.setState({ image, uploadImg })
   }
 
   render() {

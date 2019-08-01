@@ -68,14 +68,18 @@ class UserHomepage extends React.Component {
   render() {
 
     return (
-      <div className="user-homepage-container" class={(this.props.user.gender === "Male") ? "male-background" : "female-background"}>
+      <div className="user-homepage-container">
       
         <div className="user-homepage-content">
 
           <h1>Hello, {this.props.user.username}.</h1>
           <h3>Welcome{this.state.city}.</h3>
-          <h4>This is a collection that we think you will love, personalised just for you.</h4>
-
+          {this.props.user.profileImg ? 
+            <h4>This collection has been personalised just for you, from data taken from your facial login.</h4>
+            :
+            <h4>This collection has been personalised for you based on the information you submitted at signup.</h4>
+          } 
+          
         </div>
 
 

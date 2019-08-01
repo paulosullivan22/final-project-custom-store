@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios'
 import Webcam from 'react-webcam'
-import SigninFileUpload from './../../components/SigninFileUpload'
+import LoginFileUpload from './../../components/LoginFileUpload'
 
 
 class FacialLogin extends React.Component {
@@ -10,11 +10,12 @@ class FacialLogin extends React.Component {
   }
 
   importUploadedFile = file => {
-    // const username = window.location.href.split('/').reverse()[0]
     const username = window.location.href.split('/').reverse()[0]
-    console.log("File: " + file)
     axios.post("/api/auth/faciallogin", { username: username, image: file })
-      .then(res => this.props.setUser(res.data))
+      .then(res => {
+        const { message } = res.data
+        return (message) ? this.setState({ errorMessage: message }) : this.props.setUser(res.data)
+      })
       .catch(err => console.log(err))
   }
 
@@ -31,7 +32,9 @@ class FacialLogin extends React.Component {
     axios.post(`/api/auth/faciallogin`, { image: imageSrc, username })
       .then(res => {
         const { message } = res.data
-        return (message) ? this.setState({ errorMessage: message }) : this.props.setUser(res.data)
+        console.log("Message received: ")
+        console.log(message)
+        return (message) ? this.setState({ errorMessage: message }) : this.props.setUser(res.data);
       })
       .catch(err => console.log(err))
   };
@@ -58,16 +61,18 @@ class FacialLogin extends React.Component {
             width={350}
             videoConstraints={videoConstraints}
           />
+
+          {(this.state.errorMessage) ? 
+              <button className="error-message">{this.state.errorMessage}</button> : null
+            }
+
           <button 
             className="auth-button"
             onClick={this.capture}>
-              Capture photo</button>
+              Capture photo & login</button>
 
-          {(this.state.errorMessage) ? 
-            <button className="error-message">{this.state.errorMessage}</button> : null
-          }
 
-          <SigninFileUpload
+          <LoginFileUpload
             exportFile={this.importUploadedFile}
             />
 

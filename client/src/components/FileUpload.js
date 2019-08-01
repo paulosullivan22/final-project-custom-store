@@ -42,16 +42,11 @@ class FileUpload extends Component {
           profileImg: `https://project3profileimages.s3.us-east-2.amazonaws.com/${fileName}` 
         })
         .then(res => {
-          (res.data.message) ? 
-            this.props.redirect(false) : 
-            console.log(res.data)
-            this.props.setUser(res.data)
+          return (res.data.message) ? 
+            this.props.redirect(false, res.data.message) :
             this.props.redirect(true, res.data)
+
         })
-      })
-      .catch(error => {
-        console.log(error)
-        alert("ERROR " + JSON.stringify(error));
       })
     })
     .catch(error => {
