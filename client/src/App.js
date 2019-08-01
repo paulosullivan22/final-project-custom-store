@@ -26,6 +26,8 @@ import FacialSignup from './containers/Signup/FacialSignup';
 import LocalSignup from './containers/Signup/LocalSignup';
 
 
+import Presentation from './components/Presentation'
+
 class App extends React.Component {
   state = {
     user: this.props.user,
@@ -48,6 +50,12 @@ class App extends React.Component {
               <Switch>
 
                 {/* Homepage Routes */}
+
+                <Route 
+                  exact
+                  path='/presentation'
+                  component={Presentation}
+                  />
 
                 <Route 
                   exact 
