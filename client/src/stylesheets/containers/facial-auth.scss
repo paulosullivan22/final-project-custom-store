@@ -1,31 +1,48 @@
 .facial-auth-container {
   display: flex;
-  flex-flow: column wrap;
-  align-items: center;
   justify-content: center;
   width: 100vw;
   margin: 70px 0;
 
-  hr {
-    width: 100px;
-    margin: 20px;
-  }
+  .facial-auth-content {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    width: 420px;
 
-  .title-hr {
-    width: 200px;
-  }
+    h1 {
+      margin-top: 40px;
+    }
 
-  input {
-    margin: 10px 0 0;
-    padding: 5px 7px;
-    border: 1px solid black;
-    width: 200px;
-    outline: none;
-  }
+    hr {
+      width: 100px;
+      margin: 20px;
+    }
 
-  .captured-photo {
-    width: 350px;
-    margin: 80px;
-  }
+    .title-hr {
+      width: 200px;
+    }
 
+    input {
+      margin: 10px 0 0;
+      padding: 5px 7px;
+      border: 1px solid black;
+      width: 200px;
+      outline: none;
+    }
+
+    .captured-photo {
+      width: 350px;
+      margin: 80px 0;
+    }
+  }
+}
+
+.facial-login {
+  background-color: rgb(250, 243, 244)
+}
+
+.facial-signup {
+  background-color: #efefef;
 }

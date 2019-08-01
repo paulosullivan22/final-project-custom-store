@@ -41,31 +41,36 @@ class LocalLogin extends React.Component {
   render() {
       return (
         <div className="auth-container">
+
+          <div className="auth-content-container local-login">
+
           
-          <h1>Login</h1>
+            <h1>Login</h1>
 
-          <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit}>
 
-            <label htmlFor='password'>Password: </label> 
-            <input 
-              type='password'
-              name='password'
-              onChange={this.handleChange}
-              />
+              <label htmlFor='password'>Password: </label> 
+              <input 
+                type='password'
+                name='password'
+                onChange={this.handleChange}
+                />
 
-            <button 
-            className="auth-button"
-              type='submit'
-              >
-              Submit
-              </button>
+              <button 
+              className="auth-button"
+                type='submit'
+                >
+                Submit
+                </button>
 
-              {(this.state.message) ? 
-                  <button className="error-message">{this.state.message}</button> :
-                  null
-                  }
+                {(this.state.message) ? 
+                    <button className="error-message">{this.state.message}</button> :
+                    null
+                    }
 
-          </form>
+            </form>
+
+          </div>
 
         </div>
       )

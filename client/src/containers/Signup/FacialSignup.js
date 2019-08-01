@@ -77,61 +77,67 @@ class FacialSignup extends React.Component {
     return (
       <div className="facial-auth-container">
 
-        <h1>Facial Signup</h1>
-        <hr className="title-hr"/>
+        <div className="facial-auth-content facial-signup">
 
-        <p>Please enter a username:</p>
-        <input type='text' name='username' onChange={this.handleChange} />
+            <h1>Facial Signup</h1>
+            <hr className="title-hr"/>
 
-        {(this.state.errorMessage.length) ? 
-          <button className="error-message">{this.state.errorMessage}</button> :
-          null
-        }
-          
-        {(this.state.image.length) ?  // checks if a photo has been taken, removes webcam if true
-          (<img 
-            className="captured-photo"
-            src={this.state.image} 
-            width="350px" 
-            alt="profile" />) 
-          : 
-          (this.state.mobile ? 
+            <p>Please enter a username:</p>
+            <input type='text' name='username' onChange={this.handleChange} />
+
+            {(this.state.errorMessage.length) ? 
+              <button className="error-message">{this.state.errorMessage}</button> :
+              null
+            }
+              
+            {(this.state.image.length) ?  // checks if a photo has been taken, removes webcam if true
+              (<img 
+                className="captured-photo"
+                src={this.state.image} 
+                width="350px" 
+                alt="profile" />) 
+              : 
+              (this.state.mobile ? // removes webcam if on mobile - RTC camera isn't compatible with mobile devices
+                  null 
+                  :
+                  <>
+                    <Webcam
+                      audio={false}
+                      height={350}
+                      ref={this.setRef}
+                      screenshotFormat="image/jpeg"
+                      width={350}
+                      videoConstraints={videoConstraints}
+                    />
+
+
+                    <button 
+                      className="auth-button"
+                      onClick={this.capture}>Capture photo</button>
+                  </>
+                
+              )
+            }
+
+            {this.state.mobile ? 
               null 
               :
               <>
-                <Webcam
-                  audio={false}
-                  height={350}
-                  ref={this.setRef}
-                  screenshotFormat="image/jpeg"
-                  width={350}
-                  videoConstraints={videoConstraints}
-                />
-                <button 
-                  className="auth-button"
-                  onClick={this.capture}>Capture photo</button>
+                <hr />
+                <h4>Or</h4>
+                <hr />
               </>
-            
-          )
-        }
+            }
 
-        {this.state.mobile ? 
-          null 
-          :
-          <>
-            <hr />
-            <h4>Or</h4>
-            <hr />
-          </>
-        }
+            <FileUpload 
+              username={this.state.username} 
+              capturedImage={this.state.uploadImg}
+              errorMessage={this.errorMessage}
+              redirect={this.redirect}
+              setUser={this.props.setUser}
+              />
 
-        <FileUpload 
-          username={this.state.username} 
-          capturedImage={this.state.uploadImg}
-          errorMessage={this.errorMessage}
-          redirect={this.redirect}
-          setUser={this.props.setUser}
-          />
+        </div>
 
       </div>
     )

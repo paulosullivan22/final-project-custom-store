@@ -56,43 +56,48 @@ class FacialLogin extends React.Component {
 
       return (
         <div className="facial-auth-container">
-          
-          <h1>Facial Login</h1>
-          <hr className="title-hr"/>
 
-          {this.state.mobile ? 
-            null 
-            :
-            <Webcam
-              audio={false}
-              height={350}
-              ref={this.setRef}
-              screenshotFormat="image/jpeg"
-              width={350}
-              videoConstraints={videoConstraints}
-            />}
+          <div className="facial-auth-content facial-login">
+              
+              <h1>Facial Login</h1>
+              <hr className="title-hr"/>
 
-          {(this.state.errorMessage) ? 
-              <button className="error-message">{this.state.errorMessage}</button> : null
-            }
+              {this.state.mobile ? 
+                null 
+                :
+                <Webcam
+                  audio={false}
+                  height={350}
+                  ref={this.setRef}
+                  screenshotFormat="image/jpeg"
+                  width={350}
+                  videoConstraints={videoConstraints}
+                />}
 
-          <button 
-            className="auth-button" id="facial-login-capture"
-            onClick={this.capture}>
-              Capture photo & login</button>
+              {(this.state.errorMessage) ? 
+                  <button className="error-message">{this.state.errorMessage}</button> : null
+                }
 
-          {/* {this.state.mobile ? 
-          null :
-          <>
-            <hr />
-            <h4>Or</h4>
-            <hr />
-          </>
-          } */}
+              {this.state.mobile ? 
+              null 
+              :
+              <>
+                <button 
+                  className="auth-button" id="facial-login-capture"
+                  onClick={this.capture}>
+                    Capture photo & login</button>
+                
+                  <hr />
+                  <h4>Or</h4>
+                  <hr />
+              </>
+              }
 
-          <LoginFileUpload
-            exportFile={this.importUploadedFile}
-            />
+              <LoginFileUpload
+                exportFile={this.importUploadedFile}
+                />
+
+            </div>
 
         </div>
       )

@@ -1,17 +1,17 @@
 .wishlist-button {
-  border: 1px solid black;
+  border: 1px solid rgb(44, 44, 44);;
   outline: none;
 
 }
 
 .wishlist-button:hover {
-  background-color: black;
+  background-color: rgb(44, 44, 44);;
   color: white;
 }
 
 .wishlist-button:active {
   background-color: rgb(168, 181, 172);
-  color: black
+  color: rgb(44, 44, 44);
 }
 
 .auth-button {
@@ -21,20 +21,20 @@
   width: 200px;
   margin: 10px;
   background-color: #efefef;
-  border: 1px solid black;
+  border: 1px solid rgb(44, 44, 44);;
 
 }
 
 .auth-button:hover {
   cursor: pointer;
   color: white;
-  background-color: black;
+  background-color: rgb(44, 44, 44);;
 }
 
 .signup-auth {
   .signup-link {
     text-decoration: none;
-    color: black;
+    color: rgb(44, 44, 44);;
     }
 }
 
@@ -46,16 +46,16 @@
 
 #facial-login-capture {
   color: white;
-  background-color: black;
+  background-color: rgb(44, 44, 44);;
 }
 
 .login-button {
   color: white;
-  background-color: black;
+  background-color: rgb(44, 44, 44);;
   margin: 60px;
 }
 
 .login-button:hover {
-  color: black;
+  color: rgb(44, 44, 44);;
   background-color: #efefef;
 }

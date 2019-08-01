@@ -1,74 +1,83 @@
 .home-container {
-  height: 100vh;
   display: flex;
   justify-content: center;
-  // background-color: #F4F4F4;
-  // background-image: url("https://project3profileimages.s3.us-east-2.amazonaws.com/sumner-mahaffey-7Y0NshQLohk-unsplash.jpg");
-  // background-size: cover;
-  // position: relative;
-  // z-index: -2;
 
+  .card-container {
+    width: 800px;
+    display: flex;
+    flex-flow: row wrap;
 
-
-  .home-container-content {
-    max-width: 900px;
-    background-image: url("https://project3profileimages.s3.us-east-2.amazonaws.com/sumner-mahaffey-7Y0NshQLohk-unsplash.jpg");
-    background-size: cover;
-    position: relative;
-    z-index: -2;
-
-    .background-layer {
-      background-color: rgba(255, 255, 255, .6);
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
+    .homepage-card {
+      height: 320px;
+      width: 200px;
+      overflow: hidden;
     }
 
-    .shape {
-      height: 70vh;
-      width: 100%;
-      background-image: linear-gradient(167deg, #dfdfdf 70%, rgba(167, 139, 139, 0) calc(70% + 2px));
-      display: flex;
-      align-items: center;
-      flex-direction: column;
+    .homepage-card {
+      h1, h5 {
+        margin: 15px;
+      }
 
-      .homepage-content {
-        margin: 80px 70px;
+      .first-image {
+        background-image: url('https://cdn.closed.com/generated/product/4/2048_3072_85/C85206-40S-26-218.jpg'), linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15));
+      }
 
-        h1 {
-          color: #2c2c2c;
-          font-size: 3em;
-          margin-bottom: 30px;
+      .second-image {
+        
+        background-color: #587573
+      }
+
+      .third-image {
+        background-color: rgb(250, 243, 244)
+      }
+
+      .fourth-image {
+        background-image: url('https://project3profileimages.s3.us-east-2.amazonaws.com/chris-lee-70l1tDAI6rM-unsplash+(1).jpg'), linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15));
+      }
+
+      .background-image {
+        background-blend-mode: overlay;
+        background-size: cover;
+        width: 100%;
+        height: 100%;
+        transition: all .2s;
+      }
+
+      .card-content {
+        width: 120px;
+        padding-left: 10px;
+
+        h5 {
+          line-height: 1.5em;
         }
+      }
 
-        h3 {
-          font-size: 1.1em;
-          line-height: 1.4em;
-        }
+      .card-content-last {
+        width: 150px;
       }
     }
 
-
-  }
-
-  @media screen and (max-width: 455px) {
-    .home-container-content {
-      .shape {
-        .homepage-content {
-          margin: 50px;
-          
-          h1 {
-            font-size: 2.5em
-          }
-
-          h3 {
-            font-size: 0.9em;
-          }
-        }
-      }
+    .homepage-card:hover .background-image {
+      transform: scale(1.1)
     }
+    
+
+    .homepage-card:nth-child(1) {
+      background-color: #c9d5c9;
+    }
+
+    .homepage-card:nth-last-child(3) {
+      background-color: #c6bc99;
+    }
+
+    .homepage-card:nth-last-child(6) {
+      background-color: #efefef;
+    }
+
+    .homepage-card:nth-child(8) {
+      background-color: #e6dcc3;
+    }
+
   }
+
 }

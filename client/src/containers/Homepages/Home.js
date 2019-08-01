@@ -6,19 +6,51 @@ class Home extends React.Component {
 
     return (
       <div className='home-container'>
+
+        <div className="card-container">
         
-        <div className="home-container-content">
-        <div className="background-layer" />
+          <div className="homepage-card content-card">
+            <h1>Welcome to the <span className="underline">Smarter Store</span>.</h1>
+            </div> 
 
-          <div className='shape'>
+          <div className="homepage-card">
+            <div class="background-image first-image" />
+            </div> 
 
-            <div className="homepage-content">
-              <h1>Our future is a smart future.</h1>
-              <h3>This smart store uses advanced facial recognition to authenticate users, gather data and display personalised collections.</h3>
+          <div className="homepage-card content-card">
+            <div className="card-content">
+              <h5>Website authentification routes lose <span class="underline">millions of visitors</span> every year through poor user experience.</h5>
+              </div>
+            </div> 
+
+          <div className="homepage-card">
+            <div class="background-image second-image" />
+            </div> 
+
+          <div className="homepage-card">
+            <div class="background-image third-image" />
+            </div> 
+
+          <div className="homepage-card content-card">
+            <div className="card-content">
+              <h5>This website provides <span className="underline">facial authentification</span> to provide a streamlined user experience.</h5>
+              </div>
+            </div> 
+
+          <div className="homepage-card">
+              <div className="background-image fourth-image" />
+            </div> 
+
+          <div className="homepage-card content-card">
+            <div className="card-content card-content-last">
+              <h5>By analysing facial photos, we learn about the user.</h5>
+              <h5>From this data, we create a <span class="underline">personalised collection</span> for every single user.</h5>
             </div>
+            </div> 
 
         </div>
-        </div>
+
+
       </div>
     )
   }

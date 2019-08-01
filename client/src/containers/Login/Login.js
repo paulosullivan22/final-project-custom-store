@@ -30,6 +30,8 @@ class Login extends React.Component {
     return (
       <div className="auth-container">
 
+        <div className="auth-content-container login-home">
+
         <h1>Login</h1>
 
           <p>Please enter your username:</p>
@@ -50,6 +52,8 @@ class Login extends React.Component {
           {(this.state.message.length) ? 
             <button className="error-message">{this.state.message}</button> : null
             }
+
+          </div>
 
       </div>
     )

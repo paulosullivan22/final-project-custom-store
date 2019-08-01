@@ -1,35 +1,61 @@
 .auth-container {
-  display: flex;
-  flex-flow: column wrap;
-  align-items: center;
-  justify-content: center;
   width: 100vw;
   margin: 50px 10px;
+  display: flex;
+  justify-content: center;
 
-  h1 {
-    margin: 40px 0 20px;
-  }
-
-  h5 {
-    margin-bottom: 35px;
-  }
-
-  form {
+  .auth-content-container {
     display: flex;
-    flex-direction: column;
+    flex-flow: column wrap;
     align-items: center;
+    justify-content: center;
+    height: 350px;
+    width: 400px;
+    // background-color: #c9d5c9;
 
-  }
+    h1 {
+      margin-bottom: 20px;
+    }
 
-  input, select {
-    margin: 10px 0 20px;
-    padding: 5px 7px;
-    border: 1px solid black;
-    width: 200px;
-    outline: none;
-  }
+    p {
+      text-align: center;
+      margin: 0 20px 35px;
+    }
 
-  select {
-    width: 216px;
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+    }
+
+    input, select {
+      margin: 10px 0 20px;
+      padding: 5px 7px;
+      border: 1px solid black;
+      width: 200px;
+      outline: none;
+    }
+
+    select {
+      width: 216px;
+    }
   }
+}
+
+.sign-up-home {
+  background-color: #c9d5c9;
+}
+
+.login-home {
+  background-color: #8fafad;
+}
+
+.local-login {
+  background-color: #86a69b;
+}
+
+.local-sign-up {
+  padding: 20px;
+  background-color: #e6dcc3;
 }
