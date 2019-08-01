@@ -34,11 +34,8 @@ class LoginFileUpload extends Component {
   render() {
 
     return (
-      <div className="App">
+      <div>
         <center>
-          <hr />
-          <h4>Or</h4>
-          <hr />
           <label 
             htmlFor="file"
             className="auth-button file-choice"

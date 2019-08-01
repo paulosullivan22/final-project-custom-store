@@ -13,11 +13,8 @@ class FacialSignup extends React.Component {
 
   componentDidMount() {
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-      console.log('mobile')
       this.setState({ mobile: true })
-     } else {
-       console.log("desktop")
-     }
+    }
   }
 
   handleChange = e => {
@@ -118,7 +115,15 @@ class FacialSignup extends React.Component {
           )
         }
 
-        
+        {this.state.mobile ? 
+          null 
+          :
+          <>
+            <hr />
+            <h4>Or</h4>
+            <hr />
+          </>
+        }
 
         <FileUpload 
           username={this.state.username} 

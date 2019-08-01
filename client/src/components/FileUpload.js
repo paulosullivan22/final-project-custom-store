@@ -60,9 +60,6 @@ class FileUpload extends Component {
     return (
       <div>
         <center>
-          <hr />
-          <h4>Or</h4>
-          <hr />
           <label 
             htmlFor="file"
             className="auth-button file-choice"

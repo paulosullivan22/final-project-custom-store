@@ -6,7 +6,14 @@ import LoginFileUpload from './../../components/LoginFileUpload'
 
 class FacialLogin extends React.Component {
   state = {
-    errorMessage: ''  
+    errorMessage: '',
+    mobile: false 
+  }
+
+  componentDidMount() {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+      this.setState({ mobile: true })
+    }
   }
 
   importUploadedFile = file => {
@@ -53,14 +60,17 @@ class FacialLogin extends React.Component {
           <h1>Facial Login</h1>
           <hr className="title-hr"/>
 
-          <Webcam
-            audio={false}
-            height={350}
-            ref={this.setRef}
-            screenshotFormat="image/jpeg"
-            width={350}
-            videoConstraints={videoConstraints}
-          />
+          {this.state.mobile ? 
+            null 
+            :
+            <Webcam
+              audio={false}
+              height={350}
+              ref={this.setRef}
+              screenshotFormat="image/jpeg"
+              width={350}
+              videoConstraints={videoConstraints}
+            />}
 
           {(this.state.errorMessage) ? 
               <button className="error-message">{this.state.errorMessage}</button> : null
@@ -71,6 +81,14 @@ class FacialLogin extends React.Component {
             onClick={this.capture}>
               Capture photo & login</button>
 
+          {/* {this.state.mobile ? 
+          null :
+          <>
+            <hr />
+            <h4>Or</h4>
+            <hr />
+          </>
+          } */}
 
           <LoginFileUpload
             exportFile={this.importUploadedFile}
