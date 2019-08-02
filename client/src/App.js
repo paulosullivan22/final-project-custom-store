@@ -32,7 +32,6 @@ class App extends React.Component {
   }
 
   setUser = user => {
-    console.log(user)
     this.setState({
       user: user
     })
@@ -63,6 +62,7 @@ class App extends React.Component {
                   redirectPath="/login"
                   user={this.state.user}
                   component={UserHomepage}
+                  setUser={this.setUser}
                   />
 
 

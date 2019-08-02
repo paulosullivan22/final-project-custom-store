@@ -80,6 +80,19 @@
 
 }
 
+@media screen and (max-width: 799px) {
+  .home-container {
+    .card-container {
+      width: 100%;
+
+      .homepage-card {
+        width: 25%;
+
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 599px){
   .home-container {
     .card-container {
@@ -94,5 +107,4 @@
       }
     }
   }
-
 }
