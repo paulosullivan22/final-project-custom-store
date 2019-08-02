@@ -30,7 +30,7 @@ class LocalLogin extends React.Component {
         console.log('res: ' + res)
         if (message) return this.setState({ message })
         this.props.setUser(res.data)
-        this.props.history.push('/store')
+        this.props.history.push('/user')
         }
       )
       .catch(err => {
