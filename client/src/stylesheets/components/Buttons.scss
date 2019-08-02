@@ -28,7 +28,7 @@
 .auth-button:hover {
   cursor: pointer;
   color: white;
-  background-color: rgb(44, 44, 44);;
+  background-color: rgb(44, 44, 44);
 }
 
 .signup-auth {
@@ -47,6 +47,11 @@
 #facial-login-capture {
   color: white;
   background-color: rgb(44, 44, 44);;
+}
+
+#facial-login-capture:hover {
+  background-color: #efefef;
+  color: rgb(44, 44, 44);
 }
 
 .login-button {

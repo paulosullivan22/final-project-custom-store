@@ -44,7 +44,7 @@ class Home extends React.Component {
           <div className="homepage-card content-card">
             <div className="card-content card-content-last">
               <h5>By analysing facial photos, we learn about the user.</h5>
-              <h5>From this data, we create a <span className="underline">personalised collection</span> for every single user.</h5>
+              <h5>From this data, a <span className="underline">personalised collection</span> is created for every single user.</h5>
             </div>
             </div> 
 
