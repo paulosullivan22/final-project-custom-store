@@ -30,10 +30,8 @@ class FileUpload extends Component {
       const signedRequest = returnData.signedRequest;
       const url = returnData.url;
       this.setState({ url })
-      console.log("Recieved a signed request " + signedRequest);
       
      const options = { headers: { "Content-Type": fileType, "x-amz-acl": "public-read" } };
-     console.log(file)
       axios.put(signedRequest, file, options)
       .then(result => {
         this.setState({ success: true });

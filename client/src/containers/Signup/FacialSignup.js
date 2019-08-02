@@ -20,7 +20,7 @@ class FacialSignup extends React.Component {
   handleChange = e => {
     this.setState({
       username: e.target.value
-    }, () => console.log(this.state))
+    })
   }
 
   errorMessage = message => {

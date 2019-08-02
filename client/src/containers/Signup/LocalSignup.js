@@ -24,8 +24,6 @@ class LocalSignup extends React.Component {
   handleSubmit = e => {
     e.preventDefault()
 
-    console.log(e)
-
     axios
       .post("/api/auth/localsignup", {
         username: this.state.username,
@@ -33,7 +31,6 @@ class LocalSignup extends React.Component {
         gender: this.state.gender
       })
       .then((response) => {
-        console.log(response.data)
         const { message } = response.data
         if (message) return this.setState({ message })
         this.props.setUser(response.data)

@@ -18,7 +18,6 @@ class LocalLogin extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    console.log(this.props)
 
     axios
       .post("/api/auth/emaillogin", {
@@ -27,7 +26,6 @@ class LocalLogin extends React.Component {
       })
       .then(res => {
         const { message } = res.data
-        console.log('res: ' + res)
         if (message) return this.setState({ message })
         this.props.setUser(res.data)
         this.props.history.push('/user')

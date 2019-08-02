@@ -14,21 +14,21 @@ class Home extends React.Component {
             </div> 
 
           <div className="homepage-card">
-            <div class="background-image first-image" />
+            <div className="background-image first-image" />
             </div> 
 
           <div className="homepage-card content-card">
             <div className="card-content">
-              <h5>Website authentification routes lose <span class="underline">millions of visitors</span> every year through poor user experience.</h5>
+              <h5>Website authentification routes lose <span className="underline">millions of visitors</span> every year through poor user experience.</h5>
               </div>
             </div> 
 
           <div className="homepage-card">
-            <div class="background-image second-image" />
+            <div className="background-image second-image" />
             </div> 
 
           <div className="homepage-card">
-            <div class="background-image third-image" />
+            <div className="background-image third-image" />
             </div> 
 
           <div className="homepage-card content-card">
@@ -44,7 +44,7 @@ class Home extends React.Component {
           <div className="homepage-card content-card">
             <div className="card-content card-content-last">
               <h5>By analysing facial photos, we learn about the user.</h5>
-              <h5>From this data, we create a <span class="underline">personalised collection</span> for every single user.</h5>
+              <h5>From this data, we create a <span className="underline">personalised collection</span> for every single user.</h5>
             </div>
             </div> 
 

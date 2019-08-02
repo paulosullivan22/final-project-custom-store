@@ -11,11 +11,13 @@
       height: 320px;
       width: 200px;
       overflow: hidden;
-    }
-
-    .homepage-card {
+    
       h1, h5 {
         margin: 15px;
+      }
+      
+      h5 {
+        line-height: 1.5em;
       }
 
       .first-image {
@@ -46,10 +48,6 @@
       .card-content {
         width: 120px;
         padding-left: 10px;
-
-        h5 {
-          line-height: 1.5em;
-        }
       }
 
       .card-content-last {
@@ -78,6 +76,23 @@
       background-color: #e6dcc3;
     }
 
+  }
+
+}
+
+@media screen and (max-width: 599px){
+  .home-container {
+    .card-container {
+      width: 100%;
+
+      .homepage-card {
+        width: 50%;
+
+        h1 {
+          margin-top: 50px;
+        }
+      }
+    }
   }
 
 }

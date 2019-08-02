@@ -11,7 +11,6 @@ class MainStore extends React.Component {
   }
 
   searchChange = e => {
-    console.log(this.state.inventory)
     const filteredInventory = this.state.originalInventory.filter(
       item => {
         return (item.name.toLowerCase().includes(e.target.value.toLowerCase() ||
@@ -27,7 +26,6 @@ class MainStore extends React.Component {
   }
 
   filterChange = (filter) => {
-    console.log(filter)
 
     let inventory = this.state.originalInventory.filter(item=>{
       return filter.includes(item.category.toLowerCase()) 
@@ -45,11 +43,9 @@ class MainStore extends React.Component {
       inventory = inventory.filter(item=>item.gender === "Female")
     }
 
-    console.log(inventory)
      if (!inventory.length) inventory = this.state.originalInventory
 
      if (filter.includes("male") && filter.includes("female")) {
-      console.log('both')
       inventory = []
     }
 
@@ -60,8 +56,6 @@ class MainStore extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
-    console.log(this.props.user)
 
     axios
       .get('/api/store')

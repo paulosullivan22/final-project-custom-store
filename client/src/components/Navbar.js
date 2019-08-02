@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 const handleLogout = props => {
-  console.log(props)
   axios.post("/api/auth/logout")
     .then(res => res.data)
     .then(() => {
