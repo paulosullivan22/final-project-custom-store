@@ -1,38 +1,36 @@
 .nav-container {
+  background-color: rgb(245, 245, 245);
+  height: 60px;
   display: flex;
   justify-content: center;
   width: 100%;
-  background-color: rgb(245, 245, 245);
-  height: 60px;
 
   nav {
     background-color: rgb(245, 245, 245);
-    height: 60px;
     position: fixed;
+    height: 60px;
+    margin-bottom: 40px;
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 40px;
-    
+    justify-content: center;    
     
     ul {
+      max-width: 900px;
       list-style-type: none;
       display: flex;
-      align-items: center;
-      max-width: 900px;
-      
+      align-items: center;      
 
       li {
         margin-left: 20px;
 
         .nav-item {
+          border: 1px solid rgb(245, 245, 245);
           box-sizing: border-box;
           text-decoration: none;
           color: black;
           font-size: 13px;
           padding: 6px 12px;
-          border: 1px solid rgb(245, 245, 245);
         }
 
         .nav-item:hover {
@@ -47,7 +45,7 @@
 
   }
 
-  @media screen and (max-width: 500px){
+  @media screen and (max-width: 500px) {
     nav {
       ul {
         li {

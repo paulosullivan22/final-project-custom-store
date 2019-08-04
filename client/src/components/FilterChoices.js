@@ -25,7 +25,6 @@ class FilterChoices extends React.Component {
       }
       this.props.filterChange(checkedFilters)
     })
-    
   }
 
   render() {
@@ -76,7 +75,6 @@ class FilterChoices extends React.Component {
                 </li>
 
           </ul>
-
         </div>
     )
   }

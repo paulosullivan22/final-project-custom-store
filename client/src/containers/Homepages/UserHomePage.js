@@ -78,8 +78,7 @@ class UserHomepage extends React.Component {
             <h4>This collection has been personalised just for you, from data taken from your facial login.</h4>
             :
             <h4>This collection has been personalised for you based on the information you submitted at sign up.</h4>
-          } 
-          
+          }  
         </div>
 
 
@@ -111,9 +110,7 @@ class UserHomepage extends React.Component {
               ) : null
             })
           }</div>)
-          
         }</div>
-
       </div>
     )
   }

@@ -7,8 +7,7 @@ class Login extends React.Component {
     message: ''
   }
 
-  handleChange = e => {
-
+  handleChange = e => { // sets user to value user enters in input 
     this.setState({
       username: e.target.value
     })
@@ -19,8 +18,8 @@ class Login extends React.Component {
       .then(res => {
         const { message } = res.data
         if (message) return this.setState({ message })
+        // redirects user to their choice of signup page
         return this.props.history.push(`/${path}login/${this.state.username}`)
-
       })
       .catch(err => console.log(err))
   }
@@ -49,7 +48,7 @@ class Login extends React.Component {
               Password Login
               </button>
 
-          {(this.state.message.length) ? 
+          {(this.state.message.length) ? // if message received from DB, display message
             <button className="error-message">{this.state.message}</button> : null
             }
 

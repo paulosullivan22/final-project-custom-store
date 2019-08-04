@@ -1,6 +1,8 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
+// creates routes for protected areas of the site
+// passes through user information if logged in or redirects if not logged in
 const ProtectedRoute = ({
   component: Component,
   user,

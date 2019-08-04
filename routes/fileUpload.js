@@ -1,11 +1,10 @@
 const express = require('express')
 const router = express.Router()
-const User = require("../models/User");
 const aws = require('aws-sdk'); 
-require('dotenv').config(); // Configure dotenv to load in the .env file
+require('dotenv').config();
 
 aws.config.update({
-  region: 'us-east-2', // Put your aws region here
+  region: 'us-east-2',
   accessKeyId: process.env.AWSAccessKeyId,
   secretAccessKey: process.env.AWSSecretKey
 })

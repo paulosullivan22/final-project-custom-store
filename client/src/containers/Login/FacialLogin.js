@@ -10,14 +10,14 @@ class FacialLogin extends React.Component {
     mobile: false 
   }
 
-  componentDidMount() {
+  componentDidMount() { // checks client device, hides camera if mobile as RTC camera isn't compatible with those devices
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
       this.setState({ mobile: true })
     }
   }
 
   importUploadedFile = file => {
-    const username = window.location.href.split('/').reverse()[0]
+    const username = window.location.href.split('/').reverse()[0] // takes username from URL which is set in login component
     axios.post("/api/auth/faciallogin", { username: username, image: file })
       .then(res => {
         const { message } = res.data

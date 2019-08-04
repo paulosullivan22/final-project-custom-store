@@ -13,7 +13,6 @@ const handleLogout = props => {
     })
 }
 
-
 const Navbar = props => {
   return (
     <div className="nav-container">
@@ -24,7 +23,7 @@ const Navbar = props => {
               className="nav-item" 
               to='/'>Home</Link>
           </li>
-            {(props.user) ?
+            {(props.user) ? // if user is logged in
             <>
             <li>
               <Link 
@@ -39,7 +38,7 @@ const Navbar = props => {
             </> :
             null } 
 
-          {!props.user ? (
+          {!props.user ? ( // if user is not logged in
               <>
                 <li>
                   <Link 
@@ -70,7 +69,6 @@ const Navbar = props => {
               </>
               
           )}
-
         </ul>
       </nav>
     </div>

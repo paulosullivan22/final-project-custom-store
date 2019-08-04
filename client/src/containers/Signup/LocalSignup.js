@@ -17,8 +17,6 @@ class LocalSignup extends React.Component {
     this.setState({ 
       [name]: value
     })
-
-
   }
 
   handleSubmit = e => {
@@ -33,14 +31,12 @@ class LocalSignup extends React.Component {
       .then((response) => {
         const { message } = response.data
         if (message) return this.setState({ message })
-        this.props.setUser(response.data)
+        this.props.setUser(response.data) // logs user in, providing user data across the app
         this.props.history.push("/user")
-        
-        }
-      )
+        })
       .catch(err => {
         console.log(err)
-      })
+    })
   }
 
   render() {
@@ -48,7 +44,6 @@ class LocalSignup extends React.Component {
         <div className="auth-container">
 
           <div className="auth-content-container local-sign-up">
-
           
             <h1>Sign up</h1>
 
@@ -82,17 +77,15 @@ class LocalSignup extends React.Component {
                 Submit
                 </button>
 
-                {(this.state.message) ? 
+                {(this.state.message) ? // if error message, error message is displayed
                     <button className="error-message">{this.state.message}</button> :
                     null
                     }
 
-            </form>
-
-          </div>
-
+          </form>
         </div>
-      )
+      </div>
+    )
   }
 }
 

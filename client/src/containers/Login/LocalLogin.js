@@ -21,14 +21,14 @@ class LocalLogin extends React.Component {
 
     axios
       .post("/api/auth/emaillogin", {
-        username: window.location.href.split('/').reverse()[0],
+        username: window.location.href.split('/').reverse()[0], // takes username from URL which was set in login component
         password: this.state.password
       })
       .then(res => {
         const { message } = res.data
         if (message) return this.setState({ message })
         this.props.setUser(res.data)
-        this.props.history.push('/user')
+        this.props.history.push('/user') // on successful login, redirect to /user page
         }
       )
       .catch(err => {
@@ -42,7 +42,6 @@ class LocalLogin extends React.Component {
 
           <div className="auth-content-container local-login">
 
-          
             <h1>Login</h1>
 
             <form onSubmit={this.handleSubmit}>
@@ -54,24 +53,17 @@ class LocalLogin extends React.Component {
                 onChange={this.handleChange}
                 />
 
-              <button 
-              className="auth-button"
-                type='submit'
-                >
-                Submit
-                </button>
+              <button className="auth-button" type='submit'>Submit</button>
 
                 {(this.state.message) ? 
                     <button className="error-message">{this.state.message}</button> :
                     null
                     }
 
-            </form>
-
-          </div>
-
+          </form>
         </div>
-      )
+      </div>
+    )
   }
 }
 

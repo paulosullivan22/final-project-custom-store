@@ -11,7 +11,7 @@ class FacialSignup extends React.Component {
     mobile: false
   }
 
-  componentDidMount() {
+  componentDidMount() { // checks if mobile to hide RTC camera as it doesn't function on touchscreen devices
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
       this.setState({ mobile: true })
     }
@@ -23,13 +23,13 @@ class FacialSignup extends React.Component {
     })
   }
 
-  errorMessage = message => {
+  errorMessage = message => { // passed to file upload component to check for errors
     this.setState({
       errorMessage: message
     })
   }
 
-  redirect = (bool, response) => {
+  redirect = (bool, response) => { // called from file upload component if login is successful
     if (bool) {
       this.props.setUser(response)
       this.props.history.push('/user')
@@ -49,7 +49,7 @@ class FacialSignup extends React.Component {
     const uploadImg = image.replace(/^data:image\/\w+;base64,/, "") 
     const username = this.state.username
 
-    fetch(image)
+    fetch(image)   // creates blob image from base64 screenshot taken from on-page camera
     .then(res => res.blob())
     .then(blob => {
       const fd = new FormData()
@@ -138,7 +138,6 @@ class FacialSignup extends React.Component {
               />
 
         </div>
-
       </div>
     )
   }
