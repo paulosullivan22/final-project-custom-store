@@ -34,7 +34,7 @@ class FacialSignup extends React.Component {
       this.props.setUser(response)
       this.props.history.push('/user')
     }
-    else this.setState({ errorMessage: response })
+    else this.setState({ errorMessage: response }) 
   }
 
   setRef = webcam => {
