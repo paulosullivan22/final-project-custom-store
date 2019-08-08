@@ -1,52 +1,54 @@
 import React from 'react';
 import axios from 'axios'
 import Webcam from 'react-webcam'
-import LoginFileUpload from './../../components/LoginFileUpload'
+import LoginFileUpload from '../../FileUploads/LoginFileUpload'
 
 
 class FacialLogin extends React.Component {
   state = {
-    errorMessage: '',
-    mobile: false 
+    errorMessage: '', // displays any error message received from backend to client
+    mobile: false,
+    username: this.props.match.params.id,
+    image: ''
   }
 
-  componentDidMount() { // checks client device, hides camera if mobile as RTC camera isn't compatible with those devices
+  // Checks client device, hides camera if mobile as RTC camera isn't mobile compatible
+  componentDidMount() { 
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
       this.setState({ mobile: true })
     }
   }
 
-  importUploadedFile = file => {
-    const username = window.location.href.split('/').reverse()[0] // takes username from URL which is set in login component
-    axios.post("/api/auth/faciallogin", { username: username, image: file })
-      .then(res => {
-        const { message } = res.data
-        return (message) ? this.setState({ errorMessage: message }) : this.props.setUser(res.data)
-      })
-      .catch(err => console.log(err))
-  }
-
-
   setRef = webcam => {
     this.webcam = webcam;
   };
- 
+
+  // If user chooses to take a photo, triggers login check 
   capture = () => {
-    const username = window.location.href.split('/').reverse()[0]
-    const imageSrc = this.webcam.getScreenshot()
+    this.setState({ image: this.webcam.getScreenshot() }, () => this.userLogin())
+  };
 
-    const redirect = user => {
-      this.props.setUser(user)
-      this.props.history.push("/user")
-    }
+  // If user chooses to upload a file, triggers login check
+  importUploadedFile = file => {
+    this.setState({ image: file }, () => this.userLogin())
+  }
 
-    axios.post(`/api/auth/faciallogin`, { image: imageSrc, username })
+  // Checks photo similarily from either captured photo or file upload
+  // if same user, logins user in and redirects to user homepage
+  userLogin = () => {
+    axios.post("/api/auth/faciallogin", { username: this.state.username, image: this.state.image }) 
       .then(res => {
         const { message } = res.data
-        return (message) ? this.setState({ errorMessage: message }) : redirect(res.data)
+        if (!message) {
+          this.props.setUser(res.data)
+          this.props.history.push('/user')
+        } else {
+          this.setState({ errorMessage: message })
+        }
       })
       .catch(err => console.log(err))
-  };
+    }
+
  
     render() {
 
@@ -64,7 +66,7 @@ class FacialLogin extends React.Component {
               <h1>Facial Login</h1>
               <hr className="title-hr"/>
 
-              {this.state.mobile ? 
+              {this.state.mobile ? // hides camera if on mobile, displaying just file upload option
                 null 
                 :
                 <Webcam
@@ -76,11 +78,11 @@ class FacialLogin extends React.Component {
                   videoConstraints={videoConstraints}
                 />}
 
-              {(this.state.errorMessage) ? 
+              {(this.state.errorMessage) ? // if any error messages, display to client
                   <button className="error-message">{this.state.errorMessage}</button> : null
                 }
 
-              {this.state.mobile ? 
+              {this.state.mobile ? // hides this section on mobile
               null 
               :
               <>
@@ -100,7 +102,6 @@ class FacialLogin extends React.Component {
                 />
 
             </div>
-
         </div>
       )
     }

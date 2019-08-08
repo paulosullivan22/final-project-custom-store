@@ -58,7 +58,7 @@ router.post('/faciallogin', (req, res) => {
     })
 })
 
-router.post("/emaillogin", (req, res) => {
+router.post("/passwordlogin", (req, res) => {
   const { username, password } = req.body
 
   if (!username.length || !password.length) {
@@ -72,20 +72,18 @@ router.post("/emaillogin", (req, res) => {
       }
 
       if (bcrypt.compareSync(password, user.password)) {
-        console.log("valid session")
         req.session.currentUser = user
         console.log(req.session.currentUser)
        
         req.login(user,() => res.json(user))
       } else {
-        console.log("password error")
         return res.json({ message: "Please provide valid credentials."})
       }
     })
     .catch(err => next(err))
 })
 
-router.post("/localsignup", (req, res, next) => {
+router.post("/passwordsignup", (req, res, next) => {
   const { username, gender, password } = req.body
 
   if (username === "" || password === "") {
@@ -118,7 +116,6 @@ router.post("/localsignup", (req, res, next) => {
 });
 
 router.post("/facialsignup", (req, res) => {
-  console.log('axios request received')
   const { username, profileImg } = req.body;
 
   User.findOne({ username }, (err, user) => {

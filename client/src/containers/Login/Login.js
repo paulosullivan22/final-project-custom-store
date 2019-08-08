@@ -44,7 +44,7 @@ class Login extends React.Component {
 
           <button 
             className="button auth-button"
-            onClick={() => this.handleClick("email")}>
+            onClick={() => this.handleClick("password")}>
               Password Login
               </button>
 

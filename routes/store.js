@@ -13,33 +13,6 @@ router.get("/", (req, res) => {
     })
 })
 
-// router.get("/personalstore/:id", (req, res) => {
-//   const { id } = req.params
-//   console.log(id)
-
-//   User.findById({ _id: id })
-//   .then(user => {
-//     console.log("User data following:")
-    
-//     Inventory.find({
-//       $and: [
-//         { gender: user.gender },
-//         { $or: [ { category: user.wishlist[0].category },
-//                  { category: user.wishlist[1].category },
-//                  { category: user.wishlist[2].category }
-//           ]}
-        
-//       ]
-//     })
-//     .then(data => {
-//       console.log('working with res')
-//       console.log(data)
-//       res.json(data)
-//     })
-//     .catch(err => console.log(err))
-//   })
-// })
-
 router.post("/wishlist", (req, res) => {
   const { user, item } = req.body
 

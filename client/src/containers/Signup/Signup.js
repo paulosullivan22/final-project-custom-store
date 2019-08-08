@@ -16,7 +16,7 @@ const Signup = () => {
             <button className="auth-button signup-auth">Sign up with a photo</button>
           </Link>
 
-          <Link to="/localsignup">
+          <Link to="/passwordsignup">
             <button className="auth-button signup-auth">Sign up with a password</button>
           </Link>
 

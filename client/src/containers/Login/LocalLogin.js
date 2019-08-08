@@ -3,32 +3,32 @@ import axios from 'axios'
 
 class LocalLogin extends React.Component {  
   state = {
-    username: '',
+    username: this.props.match.params.id,
     password: '',
     message: '',
   }
   
+  // Changes state whenever a character is typed into input field
   handleChange = e => {
-    const { name, value } = e.target
-
     this.setState({ 
-      [name]: value
+      password: e.target.value
     })
   }
 
   handleSubmit = e => {
+  
     e.preventDefault()
 
     axios
-      .post("/api/auth/emaillogin", {
-        username: window.location.href.split('/').reverse()[0], // takes username from URL which was set in login component
+      .post("/api/auth/passwordlogin", {
+        username: this.state.username,
         password: this.state.password
       })
       .then(res => {
         const { message } = res.data
         if (message) return this.setState({ message })
         this.props.setUser(res.data)
-        this.props.history.push('/user') // on successful login, redirect to /user page
+        this.props.history.push('/user') // on successful login, redirect to user homepage
         }
       )
       .catch(err => {

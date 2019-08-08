@@ -1,5 +1,5 @@
 import React from 'react';
-import FileUpload from '../../components/FileUpload';
+import SignupFileUpload from '../../FileUploads/SignupFileUpload';
 import Webcam from 'react-webcam'
 
 class FacialSignup extends React.Component {
@@ -129,7 +129,7 @@ class FacialSignup extends React.Component {
               </>
             }
 
-            <FileUpload 
+            <SignupFileUpload 
               username={this.state.username} 
               capturedImage={this.state.uploadImg}
               errorMessage={this.errorMessage}

@@ -5,14 +5,16 @@ class LocalSignup extends React.Component {
   state = {
     username: '',
     password: '',
-    gender: 'Male',
+    gender: 'Male', // Default as male, changes if female or Not specified
     message: ''
   }
   
   handleChange = e => {
     let { name, value } = e.target
 
-    if (value === "Not specified") value = ''
+    // Ensures no gender is assigned if 'Not specified' is selected as gender
+    // User will be shown both male and female collections
+    if (value === "Not specified") value = '' 
 
     this.setState({ 
       [name]: value
@@ -23,14 +25,14 @@ class LocalSignup extends React.Component {
     e.preventDefault()
 
     axios
-      .post("/api/auth/localsignup", {
+      .post("/api/auth/passwordsignup", {
         username: this.state.username,
         password: this.state.password,
         gender: this.state.gender
       })
       .then((response) => {
         const { message } = response.data
-        if (message) return this.setState({ message })
+        if (message) return this.setState({ message }) // if invalid credentials provided, error message is displayed to client
         this.props.setUser(response.data) // logs user in, providing user data across the app
         this.props.history.push("/user")
         })

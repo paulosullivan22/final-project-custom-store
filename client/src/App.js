@@ -109,7 +109,7 @@ class App extends React.Component {
 
                 <Protected
                   exact
-                  path='/emaillogin/:id'
+                  path='/passwordlogin/:id'
                   component={LocalLogin}
                   setUser={this.setUser}
                   user={!this.state.user}
@@ -129,7 +129,7 @@ class App extends React.Component {
 
                 <Protected
                   exact
-                  path='/localsignup'
+                  path='/passwordsignup'
                   component={LocalSignup}
                   setUser={this.setUser}
                   user={!this.state.user}

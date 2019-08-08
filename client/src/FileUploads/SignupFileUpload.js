@@ -6,10 +6,6 @@ class FileUpload extends Component {
       success : false,
       url : ""
     }
-  
-  handleChange = (ev) => {
-    this.setState({ success: false, url : "" });
-  }
 
   // Perform the upload
   handleUpload = (ev) => {
@@ -48,7 +44,7 @@ class FileUpload extends Component {
       })
     })
     .catch(error => {
-      alert(JSON.stringify(error));
+      console.log(JSON.stringify(error));
     })
   }
   
@@ -58,24 +54,29 @@ class FileUpload extends Component {
     return (
       <div>
         <center>
+
           <label 
             htmlFor="file"
-            className="auth-button file-choice"
-            >Choose a file</label>
+            className="auth-button file-choice">
+            Choose a file
+            </label>
+
           <input 
-            onChange={this.handleChange} 
             ref={(ref) => { this.uploadInput = ref; }} 
             type="file"
             name="file"
             className="input-file"
             id="file"
             />
+
           <br/>
+
           <button 
             className="auth-button login-button"
-            onClick={this.handleUpload}>Submit</button>
+            onClick={this.handleUpload}>Submit
+            </button>
+
         </center>
-      
       </div>
     );
   }
