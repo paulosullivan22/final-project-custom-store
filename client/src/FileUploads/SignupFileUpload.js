@@ -8,7 +8,7 @@ class FileUpload extends Component {
     }
 
   // Perform the upload
-  handleUpload = (ev) => {
+  handleUpload = e => {
     if (!this.props.username.length) return this.props.errorMessage("Please fill in username")
 
     let file = this.uploadInput.files[0] || this.props.capturedImage
