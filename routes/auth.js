@@ -105,7 +105,7 @@ router.post("/passwordsignup", (req, res, next) => {
     });
 
     newUser.save().then(user=>{
-      req.login(user,() => res.json(user))
+      req.login(user, () => res.json(user))
     })
       
     .catch(err => {
