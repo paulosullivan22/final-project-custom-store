@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-class FilterChoices extends React.Component {
+class FilterChoices extends Component {
   state = {
     male: false,
     female: false,
@@ -17,7 +17,7 @@ class FilterChoices extends React.Component {
     this.setState({
       [stateChoice]: !this.state[stateChoice]
     }, () => {
-      for (var key in this.state) {
+      for (let key in this.state) {
         let value = this.state[key]
         if (value) {
           checkedFilters.push(key)

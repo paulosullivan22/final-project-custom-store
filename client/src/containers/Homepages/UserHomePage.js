@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { Component } from 'react'
 import axios from 'axios'
 import WishlistButton from './../../components/WishlistButton'
 
-class UserHomepage extends React.Component {
+class UserHomepage extends Component {
   state = {
     city: '',
     inventory: []
   }
 
   componentDidMount() {
+    const { user } = this.props
+
     axios.get("https://ipapi.co/json/")
       .then(res => {
         this.setState({ city: ` from ${res.data.city}` })
@@ -21,24 +23,24 @@ class UserHomepage extends React.Component {
 
         let wishlistCategories = []
         let wishlistColors = []
-        if (this.props.user.wishlist) {
-          wishlistCategories = this.props.user.wishlist.map(item => item.category)
-          wishlistColors = this.props.user.wishlist.map(item => item.color)
+        if (user.wishlist) {
+          wishlistCategories = user.wishlist.map(item => item.category)
+          wishlistColors = user.wishlist.map(item => item.color)
         }
 
         let personalInventory = []
         
         if (wishlistCategories.length) {
           personalInventory = res.data.filter(item => {
-          return this.props.user.gender === item.gender &&
+          return user.gender === item.gender &&
             (wishlistCategories.includes(item.category) ||
              wishlistColors.includes(item.color) ||
-            (item.ageRange === this.props.user.age))
+            (item.ageRange === user.age))
           }) 
         } else {
           personalInventory = res.data.filter(
             item => {
-              return this.props.user.gender === item.gender
+              return user.gender === item.gender
             }
           )
         }
@@ -66,15 +68,17 @@ class UserHomepage extends React.Component {
     
 
   render() {
+    const { user, setUser } = this.props
+    const { city, inventory } = this.state
 
     return (
       <div className="user-homepage-container">
       
         <div className="user-homepage-content">
 
-          <h1>Hello, {this.props.user.username}.</h1>
-          <h3>Welcome{this.state.city}.</h3>
-          {this.props.user.profileImg ? 
+          <h1>Hello, {user.username}.</h1>
+          <h3>Welcome{city}.</h3>
+          {user.profileImg ? 
             <h4>This collection has been personalised just for you, from data taken from your facial login.</h4>
             :
             <h4>This collection has been personalised for you based on the information you submitted at sign up.</h4>
@@ -83,11 +87,12 @@ class UserHomepage extends React.Component {
 
 
         <div className="store-container">
-          {(!this.state.inventory.length) ? 
+          {(!inventory.length) ? 
             (<div>Loading</div>) :
             
             (<div className="item-container">
-            {this.state.inventory.map((item, i) => {
+              {/* NOTE: replace with while  */}
+            {inventory.map((item, i) => {
               return (i < 8) ? (
                   <div className="item-card" key={item._id}>
                     <p>{item.name}</p>
@@ -102,8 +107,8 @@ class UserHomepage extends React.Component {
                         <span>|</span>
                         <WishlistButton 
                           item={item}
-                          user={this.props.user}
-                          setUser={this.props.setUser}
+                          user={user}
+                          setUser={setUser}
                           />
                       </div>
                   </div>

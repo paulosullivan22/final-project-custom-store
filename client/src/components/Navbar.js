@@ -2,11 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-const handleLogout = props => {
+const handleLogout = ({ setUser }) => {
   axios.post("/api/auth/logout")
     .then(res => res.data)
     .then(() => {
-        props.setUser(null)
+        setUser(null)
       })
     .catch(err => {
       console.log(err)

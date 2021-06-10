@@ -29,6 +29,7 @@ class FacialSignup extends React.Component {
     })
   }
 
+  // NOTE: rename params here
   redirect = (bool, response) => { // called from file upload component if login is successful
     if (bool) {
       this.props.setUser(response)
@@ -52,11 +53,11 @@ class FacialSignup extends React.Component {
     fetch(image)   // creates blob image from base64 screenshot taken from on-page camera
     .then(res => res.blob())
     .then(blob => {
-      const fd = new FormData()
+      const formData = new FormData()
       blob.lastModifiedDate = new Date()
       blob.name = `${username}-profile-image`
 
-      fd.append('image', blob, 'name')
+      formData.append('image', blob, 'name')
 
       this.setState({
         uploadImg: blob

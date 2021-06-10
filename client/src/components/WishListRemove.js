@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios'
 
-class WishlistRemove extends React.Component {
+class WishlistRemove extends Component {
 
   handleClick = () => {
+    const { user, item, setUser } = this.props
     axios.post("/api/store/wishlistremove", {
-      user: this.props.user,
-      item: this.props.item
+      user: user,
+      item: item
     })
     .then(res => {
-      this.props.setUser(res.data)
+      setUser(res.data)
     })
     .catch(err => console.log(err))
   }
