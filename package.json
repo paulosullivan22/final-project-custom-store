@@ -12,7 +12,7 @@
     "base64-img": "^1.0.4",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.18.3",
-    "clarifai": "^2.9.0",
+    "clarifai-nodejs-grpc": "^7.4.0",
     "connect-ensure-login": "^0.1.1",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^2.0.1",
