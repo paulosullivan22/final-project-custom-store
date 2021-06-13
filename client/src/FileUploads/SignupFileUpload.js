@@ -36,6 +36,7 @@ class FileUpload extends Component {
           profileImg: `https://project3profileimages.s3.us-east-2.amazonaws.com/${fileName}` 
         })
         .then(res => {
+          console.log(res)
           return (res.data.message) ? 
             this.props.redirect(false, res.data.message) :
             this.props.redirect(true, res.data)

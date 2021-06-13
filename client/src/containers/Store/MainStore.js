@@ -31,14 +31,16 @@ class MainStore extends React.Component {
     
     if (inventory.length === 0) {
       inventory = this.state.originalInventory
+    }
+    
+    if (filter.includes("male") && filter.includes("female")) {
+      inventory = []
     } else if (filter.includes("male")) {
       inventory = inventory.filter(item=>item.gender === "Male") 
     } else if (filter.includes("female")) {
       inventory = inventory.filter(item=>item.gender === "Female")
     } else if (!inventory.length) {
       inventory = this.state.originalInventory
-    } else if (filter.includes("male") && filter.includes("female")) {
-      inventory = []
     }
 
     this.setState({
