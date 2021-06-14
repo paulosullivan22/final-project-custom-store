@@ -118,7 +118,7 @@ router.post("/passwordsignup", (req, res, next) => {
 router.post("/facialsignup", (req, res) => {
   const { username, profileImg } = req.body;
 
-  User.findOne({ username }, (err, user) => {
+  User.findOne({ username }, async (err, user) => {
     if (user !== null) return res.json({ message: "This username is already taken."})
 
     noFaceDetected = () => {
@@ -132,82 +132,70 @@ router.post("/facialsignup", (req, res) => {
     }
 
     const stub = ClarifaiStub.grpc();
-
-    console.log(process.env.clarifaiApiKey)
-
     const metadata = new grpc.Metadata();
     metadata.set("authorization", `Key ${process.env.clarifaiApiKey}`);
 
-    stub.PostModelOutputs(
+    let age
+    let gender
+
+    await stub.PostModelOutputs(
       {
           model_id: "af40a692dfe6040f23ca656f4e144fc2", // gender
           inputs: [{data: {image: {url: profileImg}}}]
       },
+      {
+        model_id: "36f90889189ad96c516d134bc713004d", // age
+        inputs: [{data: {image: {url: profileImg}}}]
+    },
       metadata,
       (err, response) => {
           if (err) {
               console.log("Error: " + err);
               return;
           }
-  
-          if (response.status.code !== 10000) {
-              console.log("Received failed status: " + response.status.description + "\n" + response.status.details);
-              return;
-          }
-  
-          console.log("Predicted concepts, with confidence values:")
-          console.log(response.outputs[0].data.concepts[0].name)
-      }
+
+          console.log(response.outputs[0])
+
+          const genderPrediction = response.outputs[0].data.concepts[0].name
+
+          if (genderPrediction === "Masculine") gender = "Male"
+          else gender = "Female"
+        }
   );
 
-  stub.PostModelOutputs(
-    {
-        model_id: "36f90889189ad96c516d134bc713004d", // age
-        inputs: [{data: {image: {url: profileImg}}}]
-    },
-    metadata,
-    (err, response) => {
-        if (err) {
-            console.log("Error: " + err);
-            return;
-        }
+//   await stub.PostModelOutputs(
+//     {
+//         model_id: "36f90889189ad96c516d134bc713004d", // age
+//         inputs: [{data: {image: {url: profileImg}}}]
+//     },
+//     metadata,
+//     (err, response) => {
+//         if (err) {
+//             console.log("Error: " + err);
+//             return;
+//         }
 
-        if (response.status.code !== 10000) {
-            console.log("Received failed status: " + response.status.description + "\n" + response.status.details);
-            return;
-        }
+//         const ageRange = response.outputs[0].data.concepts[0].name
 
-        console.log("Predicted concepts, with confidence values:")
-        console.log(response.outputs[0].data.concepts[0].name)
-    }
-);
+//         console.log(ageRange)
 
-    // app.models.predict("c0c0ac362b03416da06ab3fa36fb58e3", profileImg)
-    //   .then(res => {
+//         age = (ageRange.split('-').map(age => parseInt(age)).reduce((acc, val) => acc + val))/2
 
-    //     console.log("Clarifai face data: ")
-    //     if (!res.outputs[0].data.regions) return noFaceDetected()
-    //     const ageData = res.outputs[0].data.regions[0].data.face.age_appearance.concepts;
-    //     const age = Math.round(ageData.map(age => parseInt(age.name)).reduce((acc, val) => acc + val)/ageData.length)
+//         console.log('age is ' + age)
+//     }
+// );
 
-    //     let gender = res.outputs[0].data.regions[0].data.face.gender_appearance.concepts[0].name
-    //     if (gender === "masculine") gender = "Male"
-    //     else gender = "Female"
+console.log(age)
+console.log(gender)
 
-    //     const newUser = new User({
-    //       username,
-    //       profileImg,
-    //       age,
-    //       gender
-    //     });
+const newUser = new User({
+  username,
+  profileImg,
+  age,
+  gender
+});
 
-    //     newUserLogin(newUser)
-    //     })
-    //   .catch(err => {
-    //     console.log(JSON.stringify(err))
-    //     console.log("Error creating user" + err)
-    //     res.json({ message: "Uh oh, something went wrong."})
-    //   })
+newUserLogin(newUser)
     }
   )
 })
