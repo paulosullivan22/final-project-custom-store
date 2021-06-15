@@ -91,7 +91,7 @@ class UserHomepage extends Component {
             (<div>Loading</div>) :
             
             (<div className="item-container">
-              {/* NOTE: replace with while  */}
+              {/* NOTE: replace with while loop */}
             {inventory.map((item, i) => {
               return (i < 8) ? (
                   <div className="item-card" key={item._id}>
