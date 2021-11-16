@@ -8,7 +8,7 @@
     "dev-windows": "nodemon ./bin/www"
   },
   "dependencies": {
-    "aws-sdk": "^2.498.0",
+    "aws-sdk": "^2.814.0",
     "base64-img": "^1.0.4",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.18.3",
